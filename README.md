@@ -4,8 +4,9 @@
 
 ## Description
 
-appgenpro is an innovative solution designed to empower non-technical business users to create enterprise-grade applications. It creates a team of virtual "AI Agent" teams that performs the task of roles involved in application development lifecycle to generate deliverables for each role including working business solution as a result.
+Appgenpro stands as a groundbreaking tool tailored for non-technical business professionals, enabling them to develop high-quality enterprise applications. This platform harnesses the capabilities of virtual "AI Agent" teams, each assigned to various roles in the application development process. These AI agents collaboratively work to produce outputs for each role, culminating in a functional business solution.
 
+Appgenpro distinguishes itself from other similar open-source projects through its distinctive design, rooted in the autogen multi-agent framework, and its features specifically aimed at enterprise application development. As we diligently work to fulfill our roadmap, we invite the community to contribute suggestions for new features, enhancing the tool's utility and relevance for users. This collaborative approach ensures Appgenpro remains a cutting-edge and user-focused solution in the field of application development.
 ## Table of Contents
 
 - [Installation](#installation)
