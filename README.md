@@ -114,7 +114,7 @@ Specifically,
 # Contact
 If you have any questions or feedback, feel free to reach out to us:
 
-* [Email](improve.appgenpro@gmail.com)
+* [Email](mailto:improve.appgenpro@gmail.com?subject=[GitHub]%20appgenpro%20query)
 
 
 
