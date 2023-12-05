@@ -1,0 +1,13 @@
+Requirement: 
+Create an interactive BI Dasboard that will answer the following questions for solar panels:
+1. What is the energy output of the panel?
+2. Are there instances of underperformance of the solar panel?
+3. Why does the panel fail?
+4. Can we predict when the panel will fail in the coming months? How frequently?
+Data source is at: ~/Desktop/solar_sensors.csv
+
+1) Real-time vs Batch: Currently, the data source is batch with daily updates. But, I want to build something that might be suitable for real-time processing / visualization. 
+
+2) Criteria for performance evaluation:  comparing actual output versus expected output based on factors like panel efficiency, location, and weather conditions. 
+
+3) For panel failures and frequency: categorize these failures (e.g., by cause, duration of downtime)

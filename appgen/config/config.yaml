@@ -1,0 +1,11 @@
+#### for OpenAI
+OAI_CONFIG_LIST:
+  - model: 'gpt-4-1106-preview'
+    api_key: 'YOUR_API_KEY'
+
+#### for Mermaid CLI
+## If you installed mmdc (Mermaid CLI) from npm then enable the following configuration.
+MMDC: "./node_modules/.bin/mmdc"
+
+#### for GitHub
+GITHUB_TOKEN: 'YOUR_GITHUB_TOKEN'
