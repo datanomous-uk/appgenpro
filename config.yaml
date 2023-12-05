@@ -1,0 +1,13 @@
+#### for OpenAI
+# ft:gpt-3.5-turbo-1106:personal::8V1UfoKu
+OAI_CONFIG_LIST:
+  - model: 'gpt-4-1106-preview' # gpt-4-1106-preview
+    api_key: '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'
+
+#### for Mermaid CLI
+## If you installed mmdc (Mermaid CLI) from npm then enable the following configuration.
+MMDC: "./node_modules/.bin/mmdc"
+
+
+#### for GitHub
+GITHUB_TOKEN: 'YOUR_GITHUB_TOKEN'

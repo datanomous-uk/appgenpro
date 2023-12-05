@@ -3,7 +3,7 @@
 
 ## Address already in use
 
-If you get the following error when you run `chainlit run appgenpro.py`
+If you get the following error when you run `chainlit run aipreneuros.py`
 ```
 [Errno 48] error while attempting to bind on address ('0.0.0.0', 8000): address already in use
 ```
