@@ -85,22 +85,63 @@ class BacklogSchema(Document):
             "document": document,
             "image_paths" : []
         }
-        
-
+          
   @staticmethod
   def get_format_example(**kwargs):
     backlog = BacklogSchema(
       Title="Development Backlog Document",
       PythonPackageName="""```python
-package_name
-```""",
-      DependenciesandTools=[
-      ],
-      RequiredPythonPackages="""
-    """,
-      TaskList=[
-           ("...", "...")],
-      FullAPISpec=""" """
-  )
+      package_name
+      ```""",
+            DependenciesandTools=[
+              ("pandas", "For data loading and manipulation tasks such as data ingestion, curation, and transformation."),
+              ("yaml", "To load the configuration file, config.yaml, into a singleton Config class for easy access."),
+              ("flask", "To create the web application and API endpoints."),
+              ("bcrypt", "To hash passwords and any sensitive data during data ingestion and curation."),
+              ("dagster", "To create automated workflows and orchestration."),
+              ("plotly", "To create visualizations for the dashboard."),
+              ("...", "...")
+            ],
+            RequiredPythonPackages="""pandas
+            PyYAML
+            flask
+            bcrypt
+            dagster
+            plotly
+            pandas
+            scikit-learn
+          """,
+        TaskList=[
+            ("main.py", "Contains the orchestration logic or starting point to start the application. ....."),
+            ("config/config.yaml", "Contains the configuration for the data ingestion framework. The configurations include ... "),
+            ("config/config.py", "Contains a singleton Config class that loads the config.yaml file for easy access throughout the framework.  This class will be used by ... to ... The following functions will need to be implemented ..."),
+            ("data_ingest/data_connectors/database_connector.py", "Implements the DatabaseConnector class for fetching data from a database. This class will be used by ... to .... The following functions will need to be implemented ...  According to the program flow, the functions will need to [call/be called] from ..."),
+            ("data_ingest/data_connectors/...", "Implements the data ingestion logic for ...... "),
+            ("data-ingest/data_ingestion.py", "Implements the DataIngestion. This class will be used by ... to .... The following functions will need to be implemented ...  According to the program flow, the functions will need to [call/be called] from ..."),
+            ("data_curate/data_curation.py", "Contains the logic for applying data mappings to transform the raw data into a curated format. The data mappings are defined as ... To curate the data ... After curation ... This class will be used by ... to .... The following functions will need to be implemented ...  According to the program flow, the functions will need to [call/be called] from ..."),
+            ("data_transformation/data_transformation.py", "Contains the logic for ... This class will be used by ... to ... The following functions will need to be implemented ... According to the program flow, the functions will need to [call/be called] from ..."),
+            ("predictive_model/features.py", "Contains the logic for ... This class will be used by ... to ... The following functions will need to be implemented ... According to the program flow, the functions will need to [call/be called] from ..."),
+            ("predictive_model/predictive_model.py", "Contains the logic for ... This class will be used by ... to ... The following functions will need to be implemented ... According to the program flow, the functions will need to [call/be called] from ..."),
+            ("data_visualization/dashboard.py", "Contains the logic for .. This class will be used by ... to ... The following functions will need to be implemented ... According to the program flow, the functions will need to [call/be called] from ..."),
+            ("...", "...")],
+        FullAPISpec="""```python
+          openapi: 3.0.0
+          info:
+            title: "..."
+            version: "1.0.0"
+          paths:
+            /...:
+              post:
+                summary: "..."
+                requestBody:
+                  required: true
+                  content:
+                    "":
+                      # Add your request body content here
+                responses:
+                  '200':
+                    description: "... successful"
+          ```"""
+            )
 
     return backlog.model_dump_json()
