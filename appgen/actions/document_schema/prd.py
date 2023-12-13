@@ -26,37 +26,37 @@ class PRDSchema(Document):
     )
     DataSources: list = Field(
         title="Data Sources and Ingestion",
-        description="The data sources to be ingested by this application. If there are no data sources mentioned in the original requirements, then make assumptions based on the given information and make a clear note of why you made these assumptions.", 
+        description="If this is a data and analytics application, provide a list of the data sources to be ingested by this application. If there are no data sources mentioned in the original requirements, then make assumptions based on the given information and make a clear note of why you made these assumptions.", 
         default_factory=list
     )
     DataCuration: list = Field(
         title="Data Curation",
-        description="Provide as a list of the data cleaning and preprocessing needs. Specify data transformation or enrichment requirements. If the original requirements lack details, make assumptions and clarify your reasoning.",
+        description="If this is a data and analytics application, provide as a list of the data cleaning and preprocessing needs. Specify data transformation or enrichment requirements. If the original requirements lack details, make assumptions and clarify your reasoning.",
         default_factory=list
     )
     DataTransformation: list = Field(
         title="Data Transformation",
-        description="Provide a list of data metrics to be calculated. Define how each metric should be computed in plain text. If the original requirements are vague, make assumptions and explain your rationale.",
+        description="If this is a data and analytics application, provide a list of data metrics to be calculated. Define how each metric should be computed in plain text. If the original requirements are vague, make assumptions and explain your rationale.",
         default_factory=list
     )
     DataScience: list = Field(
         title="Data Science",
-        description="List the predictive analytics requirements for forecasting (time series, behavioural analysis), anomaly detection, root-cause analysis, recommendations. If the original requirements lack specifics, make assumptions and provide reasoning.",
+        description="If this is a data and analytics application, provide list of predictive analytics requirements for forecasting (time series, behavioural analysis), anomaly detection, root-cause analysis, recommendations. If the original requirements lack specifics, make assumptions and provide reasoning.",
         default_factory=list
     )
     DataVisualization: list = Field(
         title="Data Visualization",
-        description="List the data visualizations or charts needed for data analysis. Describe the content and format of each visualization. Explain how each visualization should be presented to answer each requirementIf the original requirements lack specifics, make assumptions and provide reasoning.",
+        description="If this is a data and analytics application, provide the list of data visualizations or charts needed for data analysis. Describe the content and format of each visualization. Explain how each visualization should be presented to answer each requirementIf the original requirements lack specifics, make assumptions and provide reasoning.",
         default_factory=list
     )
     DataSecurityAndPrivacy: list = Field(
         title="Data Security and Privacy",
-        description="Outline data security and privacy requirements related to data handling and access in plain text. Specify any encryption or access control measures. If the original requirements lack specifics, make assumptions and provide your reasoning.",
+        description="If this is a data and analytics application, outline data security and privacy requirements related to data handling and access in plain text. Specify any encryption or access control measures. If the original requirements lack specifics, make assumptions and provide your reasoning.",
         default_factory=list
     )
     Orchestration: list = Field(
         title="Orchestration",
-        description="Provide a clear description of the application's data orchestration requirements. If the original requirements are vague, make assumptions and provide reasoning.",
+        description="If this is a data and analytics application, provide a clear description of the application's data orchestration requirements. If the original requirements are vague, make assumptions and provide reasoning.",
         default_factory=list
     )
     UIRequirements: list = Field(

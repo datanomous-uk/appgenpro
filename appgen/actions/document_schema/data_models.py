@@ -64,26 +64,6 @@ class DataModelSchema(Document):
             Include attribute definitions on ER diagrams to aid comprehension of the purpose and meaning of entities.""",
         default_factory=str
     )
-    # KPIs: list[KPIDefinition] = Field(
-    #     title="Define KPIs",
-    #     description="Define KPIs with specified formulas and calculations using the logical data model you designed. Make sure to mention how any industry standards are adhered to in your calculations, where necessary.",
-    #     default_factory=list
-    # )
-    # DataIntegration: list = Field(
-    #     title="Plan for Data Integration",
-    #     description="""Explain the plan of how any ingested data sources in this project will be transformed to fit the logical data model.
-    #     You must provide a very clear and detailed plan of where this logical data model will be used in the data pipeline, how it will be implemented, 
-    #     in which microservice of the ETL pipeline it will be called, how and when the data transformation will happen, where the transformed 
-    #     data will be stored, and how it will be used to calculate KPIs and visualize insights.
-    #     Make sure to give this plan in the context of the framework/tool chosen to build and manage the logical data model.""",
-    #     default_factory=list
-    # )
-    # AnythingUnlear: str = Field(
-    #     title="Anything Unclear",
-    #     description="Anything unclear about this project and how it relates to the data models, explain here.",
-    #     default_factory=str
-    # )
-
 
     async def parse(self, resources_path:Path=Path("resources")):
         er_diagram = self.ERDiagram

@@ -37,8 +37,7 @@ class BacklogSchema(Document):
     Do NOT suggest excessive or unecessary non-python tools.
     MAKE SURE to consider the tools that might be used in all aspects of the technical solution including:
       1. How the classes and functions in the class diagram will be implemented.
-      2. How any data models will be implemented.
-      3. Anything else mentioned in the design diagram that will be implemented with Python code.
+      2. Anything else mentioned in the design diagram that will be implemented with Python code.
     """,
     default_factory=list
   )
@@ -96,65 +95,12 @@ class BacklogSchema(Document):
 package_name
 ```""",
       DependenciesandTools=[
-        ("pandas", "For data loading and manipulation tasks such as data ingestion, curation, and transformation."),
-        ("yaml", "To load the configuration file, config.yaml, into a singleton Config class for easy access."),
-        ("flask", "To create the web application and API endpoints."),
-        ("bcrypt", "To hash passwords and any sensitive data during data ingestion and curation."),
-        ("dagster", "To create automated workflows and orchestration."),
-        ("plotly", "To create visualizations for the dashboard."),
-        ("...", "...")
       ],
-      RequiredPythonPackages="""pandas
-PyYAML
-flask
-bcrypt
-dagster
-plotly
-pandas
-scikit-learn
+      RequiredPythonPackages="""
     """,
       TaskList=[
-          ("main.py", "Contains the orchestration logic for creating the dashboard with curated data and metrics. ....."),
-          ("config/config.yaml", "Contains the configuration for the data ingestion framework. The configurations include ... "),
-          ("config/config.py", "Contains a singleton Config class that loads the config.yaml file for easy access throughout the framework.  This class will be used by ... to ... The following functions will need to be implemented ..."),
-          ("data_ingest/data_connectors/database_connector.py", "Implements the DatabaseConnector class for fetching data from a database. This class will be used by ... to .... The following functions will need to be implemented ...  According to the program flow, the functions will need to [call/be called] from ..."),
-          ("data_ingest/data_connectors/...", "Implements the ... "),
-          ("data-ingest/data_ingestion.py", "Implements the DataIngestion class for orchestrating the data ingestion process. This class will be used by ... to .... The following functions will need to be implemented ...  According to the program flow, the functions will need to [call/be called] from ..."),
-          ("data_curate/data_curation.py", "Contains the logic for applying data mappings to transform the raw data into a curated format. The data mappings are defined as ... To curate the data ... After curation ... This class will be used by ... to .... The following functions will need to be implemented ...  According to the program flow, the functions will need to [call/be called] from ..."),
-          ("data_transformation/data_transformation.py", "Contains the logic for ... This class will be used by ... to ... The following functions will need to be implemented ... According to the program flow, the functions will need to [call/be called] from ..."),
-          ("predictive_model/features.py", "Contains the logic for ... This class will be used by ... to ... The following functions will need to be implemented ... According to the program flow, the functions will need to [call/be called] from ..."),
-          ("predictive_model/predictive_model.py", "Contains the logic for ... This class will be used by ... to ... The following functions will need to be implemented ... According to the program flow, the functions will need to [call/be called] from ..."),
-          ("data_visualization/dashboard.py", "Contains the logic for .. This class will be used by ... to ... The following functions will need to be implemented ... According to the program flow, the functions will need to [call/be called] from ..."),
-          ("...", "...")],
-      FullAPISpec="""```python
-openapi: 3.0.0
-info:
-  title: "..."
-  version: "1.0.0"
-paths:
-  /ingest:
-    post:
-      summary: "Ingest data from .. data source"
-      requestBody:
-        required: true
-        content:
-          "":
-            # Add your request body content here
-      responses:
-        '200':
-          description: "Data ingestion successful"
-  /curate:
-    post:
-      summary: ""
-      requestBody:
-        required: true
-        content:
-          "":
-            # Add your request body content here
-      responses:
-        '200':
-          description: "Data curation successful"
-```"""
+           ("...", "...")],
+      FullAPISpec=""" """
   )
 
     return backlog.model_dump_json()

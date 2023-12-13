@@ -1,7 +1,7 @@
 import os
 from git import Repo
 from git.exc import GitCommandError
-from github import Github
+from github import Github, GithubException
 
 
 def push_to_github(
@@ -15,13 +15,19 @@ def push_to_github(
     user = g.get_user()
     repo = None
 
+
     try:
         repo = user.get_repo(repository_name)
         repo_url = repo.clone_url
-    except Exception as e:
-        print(f"Repository '{repository_name}' does not exist. Creating a new repository.")
-        repo = user.create_repo(repository_name)
-        repo_url = repo.clone_url
+    except GithubException as e:
+        if e.status == 404:  # Typically 404 status is for Not Found
+            print(f"Repository '{repository_name}' does not exist. Creating a new repository.")
+            repo = user.create_repo(repository_name)
+            repo_url = repo.clone_url
+        else:
+            raise  # Re-raises the exception if it's not a 'Not Found' error
+
+
 
     if os.path.exists(local_folder_path):
         Repo.init(local_folder_path)

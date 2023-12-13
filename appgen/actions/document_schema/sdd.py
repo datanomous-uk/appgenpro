@@ -23,7 +23,7 @@ class SDDSchema(Document):
     )
     DataIngestion: str = Field(
         title="Data Ingestion Implementation Details",
-        description="""Explain how data from the specified data sources will be ingested into the system. 
+        description="""If this is a data and analytics application, explain how data from the specified data sources will be ingested into the system. 
         Include details about data connectors, data flow, and ingestion methods. 
         ALWAYS write step-by-step DETAILED instructions for how to implement the data ingestion process.
         """,
@@ -31,14 +31,14 @@ class SDDSchema(Document):
     )
     DataCuration: str = Field(
         title="Data Curation Implementation Details",
-        description="""Describe the process of cleaning, enriching, and structuring raw data to ensure its quality and compatibility with the system.
+        description="""If this is a data and analytics application, describe the process of cleaning, enriching, and structuring raw data to ensure its quality and compatibility with the system.
         Include steps such as duplicate removal, null value handling, and data validation.
         ALWAYS write step-by-step DETAILED instructions for how to implement the data curation process.""",
         default_factory=str
     )
     DataTransformation: str = Field(
         title="Data Transformation Implementation Details",
-        description="""Explain how curated data will be transformed into a suitable format for analysis, reporting, or storage. 
+        description="""If this is a data and analytics application, explain how curated data will be transformed into a suitable format for analysis, reporting, or storage. 
         Discuss data modeling, schema changes, and any additional metrics generation.
         ALWAYS write step-by-step instructions for how to implement the data transformation process
         ALWAYS include DETAILED instructions on how the data models designed in this document will be implemented and used in the step by step transformation process.
@@ -47,27 +47,27 @@ class SDDSchema(Document):
     )
     DataScience: str = Field(
         title="Data Science Implementation Details",
-        description="""Detail how data will be used for feature engineering and predictive model building, including the choice of data science libraries and methods. 
+        description="""If this is a data and analytics application, detail how data will be used for feature engineering and predictive model building, including the choice of data science libraries and methods. 
         ALWAYS write step-by-step DETAILED instructions for implementing the visual representations of the transformed data that meet the user requirements.
         """,
         default_factory=str
     )
     DataVisualization: str = Field(
         title="Data Visualization Implementation Details",
-        description="""Detail how data will be visualized, including the choice of visualization tools and methods. 
+        description="""If this is a data and analytics application, detail how data will be visualized, including the choice of visualization tools and methods. 
         ALWAYS write step-by-step DETAILED instructions for implementing the visual representations of the transformed data that meet the user requirements.
         """,
         default_factory=str
     )
     Orchestration: str = Field(
         title="Orchestration Implementation Details",
-        description="""Outline how various components of the system will be coordinated and managed to ensure seamless data processing and workflow execution.
+        description="""If this is a data and analytics application, outline how various components of the system will be coordinated and managed to ensure seamless data processing and workflow execution.
         ALWAYS write step-by-step DETAILED instructions for implementing the orchestration process.
         """,
         default_factory=str
     )
     ClassDiagrams: str = Field(
-        title="Data structures and Interface Definitions To Be Implemented",
+        title="Data structures and/or Interface Definitions To Be Implemented",
         description="""Use mermaid classDiagram code syntax,
             including classes (INCLUDING __init__ method) and functions (with type annotations),
             CLEARLY MARK the RELATIONSHIPS between classes, and comply with PEP8 standards.
@@ -122,57 +122,23 @@ class SDDSchema(Document):
     def get_format_example(**kwargs):
         sdd = SDDSchema(
             Title="Software Design Document",
-            HighLevelSystemDesign="""The solution architecture is based on the microservices architecture ... where each microservice is implemented using Python and orchestrated using ... to deliver an ETL Data Pipeline. 
-Using this solution, it will be possible to ...
-The microservices are called ...
-...""",
-            DataIngestion="""The [data_ingestion] microservice does the following: 
-There will be [Data Adaptor sub-component] that implements several data adaptors [such as local folder]. 
-The adaptors are configurable using a config yaml file.
-Each data source is configurable to connect to [loca folder, etc..]
-The data will be ingested in as-is format from the configured data source (for e.g. data stored under local folder)]. 
-[If the DataType is configured with a value other than 'csv', then created a data-converter implementation that converts from that data type into as csv file.]
-...""",
-            DataCuration="""The data_curation microservice does the following: 
-The raw data will be loaded from local folder called "raw" as pandas dataframe. 
-The dups will be removed and nulls will be replaced with a placeholder value. 
-The source data will be mapped to target data (column by column) and the curated data will be stored locally in local folder called "curated". 
-The table will be appended after each time the pipeline runs and ingests the data.
-...""",
-            DataTransformation="""The data_transformation microservice does the following: 
-The curated data will be loaded from "curated" as pandas dataframe. 
-The designed data model for data transformation will be used to load the curated data into this format.
-The metrics provided in the requirements will be implemented to be calculated using this data model.
-The transformed data tables will be stored folder called "conformed". 
-The transformed data table will append records if the table exists from previous run.
-...""",
-            DataScience="""The predictive-model microservice does the following: 
-The conformed data will be loaded  as pandas dataframe. 
-The features will be created based on the requirements.
-The preditive model will be created based on the requirements.
-...""",
-            DataVisualization="""The data_visualization microservice does the following: 
-The conformed data will be loaded from local folder called "conformed" as pandas dataframe. 
-The related graphics will be created using ...
-...""",
-            Orchestration= """The orchestration is the main starter file that does the following: 
-...""",
+            HighLevelSystemDesign="Document the solution based on the architecture suggested as standards.",
             ClassDiagrams="""```mermaid
-classDiagram
-    class ClassName{
-        +function_name() -> Any
-    }
-    class OtherClassName{
-        +other_function_name(param: str) -> Any
-    }    
-    ClassName "1" -- "1" OtherClassName: uses
-```""",
-            ProgramFlow="""```mermaid
-sequenceDiagram
-    participant Main as Main
-    participant ClassName as ClassNameAPI
+                classDiagram
+                    class ClassName{
+                        +function_name() -> Any
+                    }
+                    class OtherClassName{
+                        +other_function_name(param: str) -> Any
+                    }    
+                    ClassName "1" -- "1" OtherClassName: uses
+                ```""",
+                            ProgramFlow="""```mermaid
+                sequenceDiagram
+                    participant Main as Main
+                    participant ClassName as ClassNameAPI
 
-    Main->>ClassNameAPI: function_name()
-```"""
+                    Main->>ClassNameAPI: function_name()
+                ```"""
         )
         return sdd.model_dump_json()

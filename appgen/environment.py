@@ -1,7 +1,7 @@
 from pathlib import Path
 import chainlit as cl
 import pprint
-
+import json
 from appgen.utils import logger
 from appgen.config import CONFIG
 from appgen.utils.write_utils import save_document, save_code
@@ -79,20 +79,60 @@ class Environment:
         "Setup the package directory and write the requirements.txt."
         doc_name = "backlog"
         backlog_class = CONFIG.artifacts["docs"].get(doc_name, None)
+
         if backlog_class is None:
-            logger.warning(f"The Development Backlog document named '{doc_name}' wasn't found. Cannot save the requirements.txt.")
+            logger.warning(f"The Development Backlog document named '{doc_name}' wasn't found. The model used might not have created it already. Thus, cannot save the requirements.txt.")
         else:
             # package_name = backlog_class.PythonPackageName
             dependencies = backlog_class.RequiredPythonPackages
             requirements_file_path = self.project_directory / "requirements.txt"
             requirements_file_path.write_text(dependencies)
 
+    def _setup_project_env(self):
+        "Setup the package directory and write the requirements.txt."
+        doc_name = "backlog"
+        backlog_class = CONFIG.artifacts["docs"].get(doc_name, None)
+
+        if backlog_class is None:
+            logger.warning(f"The Development Backlog document named '{doc_name}' wasn't found. The model used might not have created it already. Operations requiring the backlog will be skipped or handled with a default configuration.")
+            
+            # Create a default backlog (this is just an example, modify as needed)
+            default_backlog = {
+                "title": "Default Backlog",
+                "tasks": []
+            }
+
+            # Decide the filename and path for the default backlog
+            default_backlog_filename = "default_backlog.json"
+            default_backlog_path = self.project_directory / default_backlog_filename
+
+            # Save the default backlog to a file
+            with open(default_backlog_path, 'w') as file:
+                json.dump(default_backlog, file, indent=4)
+
+            logger.info(f"Default backlog created at {default_backlog_path}")
+
+        else:
+            # Assuming backlog_class has the necessary attributes
+            dependencies = backlog_class.RequiredPythonPackages
+            requirements_file_path = self.project_directory / "requirements.txt"
+            requirements_file_path.write_text(dependencies)
+            # Additional operations that depend on the backlog
+
+
     def _save_artifacts(self):
-        logger.info("Saving artifacts...")
+        logger.info(f"Saving artifacts: {CONFIG.artifacts}")
+        
+        if "backlog" in CONFIG.artifacts:
+            backlog = CONFIG.artifacts["backlog"]
+            for name, content_class in backlog.items():
+                logger.debug("Filename:{}. Doc:{}".format(content_class, name))
+                save_document(content_class, name+".md", self.project_directory)
 
         if "docs" in CONFIG.artifacts:
             docs = CONFIG.artifacts["docs"]
             for name, content_class in docs.items():
+                logger.debug("Filename:{}. Doc:{}".format(content_class, name))
                 save_document(content_class, name+".md", self.project_directory)
         if "code" in CONFIG.artifacts:
             code = CONFIG.artifacts["code"]

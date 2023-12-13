@@ -95,26 +95,31 @@ class ChainlitUserProxyAgent(UserProxyAgent):
             res = cl.run_sync(
                 ask_helper(
                     cl.AskActionMessage,
-                    content="**Please make a selection from the options below:**\n**Continue Without Feedback or Provide Feedback?**",
+                    content="**Please make a selection from the options below:**\n**Provide Feedback to the agents on this task or finish this task entirely and move to the next task?**",
                     actions=[
-                        cl.Action(
-                            name="continue", 
-                            value="continue", 
-                            label="✅ Continue"
-                        ),
                         cl.Action(
                             name="feedback",
                             value="feedback",
                             label="💬 Provide feedback",
-                        ),  
+                        ), 
+                        # cl.Action(
+                        #     name="nofeedback", 
+                        #     value="nofeedback", 
+                        #     label="🤔 No Comment"
+                        # ),
+                        cl.Action(
+                            name="continue", 
+                            value="continue", 
+                            label="✅ Finish Task"
+                        ), 
                     ],
                     timeout=2000
                 )
             )
             if res.get("value") == "continue":
                 return "exit"
-            # if res.get("value") == "exit":
-            #     return "exit"
+            # if res.get("value") == "nofeedback":
+            #     return ""
 
         reply = cl.run_sync(ask_helper(cl.AskUserMessage, content="", timeout=2000))
         return reply["content"].strip()
