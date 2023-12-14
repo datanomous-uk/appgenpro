@@ -6,5 +6,5 @@ resources
 workspace
 .cache
 logs
-packages-lock.json
+package-lock.json
 __pycache__
