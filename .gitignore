@@ -7,3 +7,4 @@ workspace
 .cache
 logs
 packages-lock.json
+__pycache__
