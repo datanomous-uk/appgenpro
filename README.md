@@ -1,6 +1,7 @@
 # appgenpro
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Docs](https://img.shields.io/badge/docs-8A2BE2)](https://datanomous-uk.github.io/appgenpro-docs)
 
 ## Description
 
@@ -8,7 +9,7 @@ Appgenpro stands as a groundbreaking tool tailored for non-technical business pr
 
 Appgenpro distinguishes itself from other similar open-source projects through its distinctive design, rooted in the autogen multi-agent framework, and its features specifically aimed at enterprise application development. As we diligently work to fulfil our roadmap, we invite the community to contribute suggestions for new features, enhancing the tool's utility and relevance for users. This collaborative approach ensures Appgenpro remains a cutting-edge and user-focused solution in the field of application development.
 
-
+Please see our [docs](https://datanomous-uk.github.io/appgenpro-docs) for more information on AppGenPro and how to get started!
 
 https://github.com/datanomous-uk/appgenpro/assets/46131251/3396a2c4-9aa7-464e-9109-b2d45a00d8f1
 
@@ -28,7 +29,6 @@ Please see `ROADMAP.md` for details of the aim of appgenpro and our mission.
 Please see `DEV.md` for details on dev topics and troubleshooting tips.
 
 Please see `CONFIG.md` for details on how to configure appgenpro.
-
 
 ## Installation
 
