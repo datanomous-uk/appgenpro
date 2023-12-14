@@ -1,4 +1,8 @@
 {
+    "_comments": [
+            "MUST HAVE ROLES: Client, Full Development Team",
+            "MUST HAVE TASKS: RequirementsGathering, SolutionDesign, TechnicalDesign, Implementation"
+    ],
     "team": [
         { 
             "role": "Client",
@@ -8,60 +12,58 @@
         },
         { 
             "role": "BusinessAnalyst",
-            "goal": "As a Business Analyst, you goal is to analyze business requirements to collect the functional requirements for a given web application, and create a requirements document. You must first directly ask the client to provide the details. DO NOT jump straight to writing the document. You MUST ALWAYS ask the client questions about any vague or unclear information and get their replies before writing the requirements document.",
+            "goal": "As a Business Analyst, you goal is to analyze business requirements to collect the functional requirements for a given application, and create a requirements document. You must first directly ask the client to provide the details. DO NOT jump straight to writing the document. You MUST ALWAYS ask the client questions about any vague or unclear information and get their replies before writing the requirements document.",
             "constraints": "You should ONLY be working on collecting requirements.",
             "watch_list": ["Client"],
             "actions": ["WriteRequirementsDocument"],
-            "react_assistant_instructions": "Analyze the given details to make sure an appropriate requirements document is created for an end-to-end web application based on best practices and enterprise standards."
+            "react_assistant_instructions": "Analyze the given details to make sure an appropriate requirements document is created for an end-to-end application based on best practices and enterprise standards."
         },
         { 
             "role": "SolutionArchitect",
-            "goal": "As a Solution Architect, your goal is to capture non-functional requirements for the given web application that will be deployed to cloud. ",
-            "constraints": "You should ONLY be working on designing web applications. You should NEVER be writing code or implementing the project. ",
+            "goal": "As a Solution Architect, your goal is to capture non-functional requirements for the given application that will be deployed to cloud. ",
+            "constraints": "You should ONLY be working on designing applications. You should NEVER be writing code or implementing the project. ",
             "watch_list": ["BusinessAnalyst"],
             "actions": ["WriteTechnicalDesignDocument"]
         },
         {
             "role": "SeniorEngineer",
             "goal": "As a Senior Engineer, your goal is to make sure that the designed technical solution for the client's request is successfully implemented. This is done in a pair programming paradigm with the Junior Engineers. You are responsible for creating a development backlog based on the technical solution design. You are also responsible for guiding the Junior Engineer to complete the tasks in development backlog. You MUST check the code if it does not work provide feedback back to Junior Engineer. You MUST ensure the quality of the code is good. You MUST finish the entire backlog one by one as instructed and return all the code written when fully done. ",
-            "constraints": "You MUST ONLY be mentoring the Junior Engineer. You MUST ONLY be working on web applications.",
+            "constraints": "You MUST ONLY be mentoring the Junior Engineer. You MUST ONLY be working on applications.",
             "watch_list": ["SolutionArchitect"],
             "actions": ["WriteDevelopmentBacklogDocument"]
         },
         {
             "role": "JuniorEngineer",
             "goal": "As a Junior Engineer, your goal is to complete the tasks in the given product backlog as instructed by the Senior Engineer. You MUST use your assistant to help you write code. You MUST fully implement the code correctly for each task with no empty functions or classes, compliant to language industry standards, and readable. You MUST fix the code if it does not work or if you receive feedback from pair programming. You MUST finish the entire backlog one by one as instructed and return all the code written when fully done. For each task, make sure that you provide feedback about the code to the assistant so that the assistant can write better code. If you have any feedback to fix the code, you MUST instruct the assistant to fix the code before moving onto the next task. Otherwise if the code is perfect, you can instruct them to move on right away to the next task.",
-            "constraints": "You MUST ONLY be working on coding the web applications.",
+            "constraints": "You MUST ONLY be working on coding the applications.",
             "watch_list": ["SeniorEngineer"],
             "actions": ["WriteCode"]
         }
     ],
     "tasks" : [
         {
-            "name": "GatherRequirements",
+            "name": "RequirementsGathering",
             "description": "Gathering Requirements and User Stories",
             "assistant_role_name": "BusinessAnalyst",
             "user_role_name": "Client",
             "task_prompt": "Based on the client's request ({request_prompt}), and the organization standards: {organization_standards}, you must now understand the requirements of the client by asking them a FEW clarifying questions (the less the better). For each question you ask, you must also provide an answer you assume the client would give you and ask them if this answer is correct. You must in the end reply with the completed Requirements Document with all functional, non-functional requirements, and detailed User Stories in Markdown format.",
             "placeholders": {
                 "organization_standards": [
-                    "Admin Panels: Use the template for admin panel from https://coreui.io/product/free-react-admin-template",
-                    "UI: Use the template for UIs from https://react-bootstrap.github.io/"
                 ]
             }
         },
         {
-            "name": "DesignSolution",
+            "name": "SolutionDesign",
             "description": "Designing The Technical Solution",
             "assistant_role_name": "SolutionArchitect",
             "user_role_name": "BusinessAnalyst",
-            "task_prompt": "Based on the client's request ({request_prompt}), requirements document : {requirements}, and the organization standards: {organization_standards}, you must now create a technical design document that will be used to develop a solution for the client's request. You must in the end reply with the completed Technical Design Document in Markdown format.",
+            "task_prompt": "Based on the requirements document ({requirements}), and the organization standards ({organization_standards}), you must now create a solution design document that will be used to develop a solution for the client's request. You must first evaluate what you have created and reply with a solution that covers all functionalities in the requirements. You must in the end reply with the completed Solution Design Document in Markdown format.",
             "placeholders": {
                 "organization_standards": [
-                    "Web App Architecture: Domain driven design will be used on a Microservices based modular architecture.",
+                    "App Architecture: Domain driven design will be used on a Microservices based modular architecture.",
                     "Frontend UI Building: Frontend applications should be composed of modular and reusable components, promoting consistency and efficiency. Use a component library for common UI elements. Ensure components are loosely coupled and can be easily replaced or updated.",
                     "Modular Frontend Structure: Organize the frontend code into modular components within the 'src' directory. Separate static assets in the 'public' directory. Ensure a consistent coding style and format using tools like ESLint and Prettier. Use the relevant reac design pattern such as MVC as single page application.",
-                    "Responsive and Accessible Design: Design for various screen sizes and devices, ensuring responsiveness. Follow web accessibility guidelines to make the application usable by as many people as possible. Use semantic HTML and provide alternative texts for media.",
+                    "Responsive and Accessible Design: Design for various screen sizes and devices, ensuring responsiveness. Follow accessibility guidelines to make the application usable by as many people as possible. Use semantic HTML and provide alternative texts for media.",
                     "API Gateway: Do not use an API Gateway component for simplicity",
                     "RESTful API Design: RESTful APIs in microservices should be stateless, use HTTP methods explicitly, and be organized around resources. Each microservice should have its own set of endpoints and should communicate with others via API calls. Versioning of APIs is crucial for backward compatibility.",
                     "Authentication: Use JWT stateless authentication",
@@ -75,14 +77,14 @@
             }
         },
         {
-            "name": "PlanDevelopment",
+            "name": "TechnicalDesign",
             "description": "Planning the Development Backlog",
             "assistant_role_name": "SeniorEngineer",
             "user_role_name": "SolutionArchitect",
-            "task_prompt": "Based on the client's request ({request_prompt}), technical design documents ({design}), and organizational standards ({organization_standards}), create a detailed development backlog so that the client's request can be successfully implemented by Junior Developers. You must in the end reply with the completed Development Backlog in Markdown format.",
+            "task_prompt": "Based on the design document ({design}), and the organization standards ({organization_standards}), create a detailed development backlog and executable tasks and then translate it into executable pseudocode for each class to be implemented by other engineers so that the client's request can be successfully implemented. You must in the end reply with the completed Development Backlog in Markdown format.",
             "placeholders": {
                 "organization_standards": [
-                    "API Spec: Create the full API spec before implementation",
+                    "API Spec: Create the full API spec before implementation including all tasks defined in the technical design document.",
                     "UI Framework: Use react to implement the UI logic based on related design patterns",
                     "Authenticating Flask APIs: Use JWT based stateless authentication in RESTful APIs. Use extensions like Flask-Login for session management and Flask-HTTPAuth for HTTP authentication. Basic Authentication is used for user login.",
                     "Database Access: Use SQLLite and MangoDB as database backends. Use ORM (Object-Relational Mapping) for database interactions to abstract database engine specifics, allowing flexibility in changing database technologies.",
@@ -95,11 +97,11 @@
 
         },
         {
-            "name": "ImplementSolution",
+            "name": "Implementation",
             "description": "Implementing The Application",
             "assistant_role_name": "JuniorEngineer",
             "user_role_name": "SeniorEngineer",
-            "task_prompt": "Based on the client's request ({requirements}), design documents ({design}), development backlog ({backlog}), and organizational standards ({organization_standards}), write executable pseudocode for each class in the cloud-native web application, then translate it into functional code, ensuring adherence to the project's full context and standards, starting with the 'main' file and proceeding in dependency order, with no placeholders and thorough debugging. You must reply with working code.",
+            "task_prompt": "Based on the development backlog ({backlog}), and the organization standards ({organization_standards}), write executable code only ensuring adherence to the project's full context. Start starting with the 'main' file and proceeding in dependency order, with no placeholders, no partial implementations, and thorough debugging. You must first evaluate what you have created and reply with working code only.",
             "placeholders": {
                 "organization_standards": [
                         "UI Design patterns: Implement the react design patterns.",
@@ -111,11 +113,10 @@
                         "Deployment to Render.com example code: [```yaml\n# render.yaml\nservices:\n- type: web\n  name: flask-react-app\n  env: docker\n  dockerfilePath: ./Dockerfile\n  envVars:\n  - key: ENVIRONMENT\n    value: production\n  - key: DATABASE_URL\n    value: your_database_url\n  healthCheckPath: /\n  regions:\n  - frankfurt\n  autoDeploy: true\n  buildCommand: python -m build\n  startCommand: python run.py\n```]",
                         "SQLAlchemy example code:: [```python\nfrom flask_sqlalchemy import SQLAlchemy\ndb = SQLAlchemy()\n\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n\n    def __repr__(self):\n        return f'<User {self.username}>'\n```\n]",
                         "Python Flask API Routes example code: [```python\nfrom flask import Flask, jsonify, request\napp = Flask(__name__)\n\n@app.route('/products', methods=['GET'])\ndef get_products():\n    # Logic to fetch and return products\n    products = [{'id': 1, 'name': 'Product A'}, {'id': 2, 'name': 'Product B'}]\n    return jsonify(products)\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```\nThis Flask route '/products' is a part of the Product Service in a microservices setup, responsible for managing product data.",
-                        "Python packages: Create a python package for each service with a __init__.py file. Write them all in one response since these don't need to be tested. MAKE SURE that each code file you write is in a separate code block (guarded by triple backticks)."
+                        "Python packages: Create a python package for each service with a __init__.py file. Write them all in one response since these don't need to be tested. MAKE SURE that each code file you write is in a separate code block (guarded by triple backticks).",
+                        "Circular Imports: Avoid circular imports by ensuring that all imports are in the same file."
                 ]
             }
         }
-
-
     ]
 }

@@ -25,6 +25,11 @@ def pretty_list(input_list):
           
 
 class BacklogSchema(Document):
+
+  class Config:
+      protected_namespaces = ()
+      json_schema_extra = {}
+
   Title: str = "Development Backlog Document"
   PythonPackageName: str = Field(
     title="Python Package Name",
@@ -124,24 +129,29 @@ class BacklogSchema(Document):
             ("predictive_model/predictive_model.py", "Contains the logic for ... This class will be used by ... to ... The following functions will need to be implemented ... According to the program flow, the functions will need to [call/be called] from ..."),
             ("data_visualization/dashboard.py", "Contains the logic for .. This class will be used by ... to ... The following functions will need to be implemented ... According to the program flow, the functions will need to [call/be called] from ..."),
             ("...", "...")],
-        FullAPISpec="""```python
-          openapi: 3.0.0
-          info:
-            title: "..."
-            version: "1.0.0"
-          paths:
-            /...:
-              post:
-                summary: "..."
-                requestBody:
-                  required: true
-                  content:
-                    "":
-                      # Add your request body content here
-                responses:
-                  '200':
-                    description: "... successful"
-          ```"""
+
+            FullAPISpec = """```python
+            openapi: 3.0.0
+            info:
+              title: "Example API"
+              version: "1.0.0"
+            paths:
+              /path/to/endpoint:
+                post:
+                  summary: "Example POST operation"
+                  requestBody:
+                    required: true
+                    content:
+                      application/json:
+                        schema:
+                          type: object
+                          properties:
+                            exampleField:
+                              type: string
+                  responses:
+                    '200':
+                      description: "Successful operation"
+            ```"""
             )
 
     return backlog.model_dump_json()

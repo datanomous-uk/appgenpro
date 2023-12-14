@@ -22,26 +22,20 @@ class Task:
         self.placeholders = placeholders
 
 
-    def __repr__(self) -> str:
-        return self.__str__()
-    
-    def __str__(self):
-        return f"Description: {pprint.pformat(self.description)}\nAssistant Role Name: {self.assistant_role_name}\nUser Role Name: {self.user_role_name}\nMax Consecutive Auto Reply: {self.max_consecutive_auto_reply}\nTask Prompt: {pprint.pformat(self.task_prompt)}\nPlaceholders: {pprint.pformat(self.placeholders)}"
-    
+    """
+    Executes the conversation between the user and the assistant on the given task.
 
+    Parameters:
+        environment (Environment): The environment in which the conversation takes place.
+
+    Returns:
+        None
+    """
     def execute(
             self, 
             environment: Environment, 
         ):
-        """
-        Executes the conversation between the user and the assistant on the given task.
 
-        Parameters:
-            environment (Environment): The environment in which the conversation takes place.
-
-        Returns:
-            None
-        """
         user_agent = environment.get_role(self.user_role_name).get_user()
         assistant_agent = environment.get_role(self.assistant_role_name).get_user()
 
@@ -96,6 +90,53 @@ class Task:
 
 
 
+
+    """
+    Override this function to customize how the environment
+    gets updated.
+
+    Args:
+        environment (str): The current environment.
+        rsp (str): The response message to update the environment with.
+
+    Returns:
+        None
+    """
+    def update_environment(self, environment, rsp):
+
+        # Customize this function.
+        pass
+
+
+
+    """
+    Override this function to customize how the prompt gets initialized
+    with the environment fields.
+
+    Parameters:
+        environment (dict): A dictionary containing the environment variables.
+
+    Returns:
+        str: The initialized task prompt.
+
+    Raises:
+        Exception: If there is an error initializing the prompt.
+    """
+    
+    def initialize_prompt(self, environment):
+
+        try:
+            self.placeholders = {**self.placeholders, **environment.dict()}
+            return self.task_prompt.format(**self.placeholders)
+        except:
+            logger.error(f"Failed to initialize the prompt '{self.task_prompt}'. Please check if the placeholders are correct '{self.placeholders}'. Then try again!")
+    
+
+
+    def log(self):
+        logger.debug(f"**Executing a new task**\n\nThe task configurations:\n\n--\n\n{self.__str__()}\n\n--\n\n")
+    
+
     def dict(self):
         return {
             "description": self.description,
@@ -106,44 +147,9 @@ class Task:
         }
     
 
-    def log(self):
-        logger.debug(f"**Executing a new task**\n\nThe task configurations:\n\n--\n\n{self.__str__()}\n\n--\n\n")
+    def __repr__(self) -> str:
+        return self.__str__()
     
-
-    def update_environment(self, environment, rsp):
-        """
-        Override this function to customize how the environment
-        gets updated.
-
-        Args:
-            environment (str): The current environment.
-            rsp (str): The response message to update the environment with.
-
-        Returns:
-            None
-        """
-        # Customize this function.
-        pass
-
-
-    def initialize_prompt(self, environment):
-        """
-        Override this function to customize how the prompt gets initialized
-        with the environment fields.
-
-        Parameters:
-            environment (dict): A dictionary containing the environment variables.
-
-        Returns:
-            str: The initialized task prompt.
-
-        Raises:
-            Exception: If there is an error initializing the prompt.
-        """
-        
-        try:
-            self.placeholders = {**self.placeholders, **environment.dict()}
-            return self.task_prompt.format(**self.placeholders)
-        except:
-            logger.error(f"Failed to initialize the prompt '{self.task_prompt}'. Please check if the placeholders are correct '{self.placeholders}'. Then try again!")
+    def __str__(self):
+        return f"Description: {pprint.pformat(self.description)}\nAssistant Role Name: {self.assistant_role_name}\nUser Role Name: {self.user_role_name}\nMax Consecutive Auto Reply: {self.max_consecutive_auto_reply}\nTask Prompt: {pprint.pformat(self.task_prompt)}\nPlaceholders: {pprint.pformat(self.placeholders)}"
     

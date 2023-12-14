@@ -23,6 +23,11 @@ class KPIDefinition(BaseModel):
     Calculation: str
 
 class DataModelSchema(Document):
+
+    class Config:
+        protected_namespaces = ()
+        json_schema_extra = {}
+
     Title: str = "Data Model Design Document"
     Standards: str = Field(
         title="Enterprise Data Standards",

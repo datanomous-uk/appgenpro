@@ -1,11 +1,11 @@
 from appgen.tasks import Task
+from appgen.config import CONFIG
 
-class AnalyzeData(Task):
-
+class TechnicalDesign(Task):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-    
 
     def update_environment(self, environment, rsp):
-        environment.requirements.append(rsp)
+        doc=CONFIG.artifacts["docs"]["backlog"]
+        environment.backlog.append(doc)
 

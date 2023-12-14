@@ -2,7 +2,7 @@ import os
 import yaml
 
 from appgen.utils import logger
-from appgen.utils.const import WORKSPACE_ROOT, APPGEN_ROOT
+from appgen.utils.const import WORKSPACE_ROOT, ROOT
 from appgen.utils.singleton import Singleton
 
 
@@ -20,7 +20,7 @@ class NotConfiguredException(Exception):
 
 class Config(metaclass=Singleton):
     _instance = None
-    default_yaml_file = f"{APPGEN_ROOT}/config/config.yaml"
+    default_yaml_file = f"{ROOT}/appgenpro_config.yaml"
 
 
     def __init__(self, yaml_file=default_yaml_file):
@@ -45,7 +45,7 @@ class Config(metaclass=Singleton):
         logger.info(f"Config is loaded: {self.config_list}")
 
         self.artifacts = dict(docs={}, code={})
-        self.project_dir = WORKSPACE_ROOT
+        self.root_dir = WORKSPACE_ROOT
         self.package_dir = WORKSPACE_ROOT
         self.use_chainlit = False
         

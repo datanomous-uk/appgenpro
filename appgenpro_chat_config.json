@@ -1,0 +1,4 @@
+{
+    "config": "{EXAMPLES_ROOT}/flask_app/app_config.json",
+    "name": "flask_app"
+}

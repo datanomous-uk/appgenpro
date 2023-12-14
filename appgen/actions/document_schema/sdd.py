@@ -7,6 +7,11 @@ from appgen.utils import logger, json_to_markdown
 import json
 
 class SDDSchema(Document):
+
+    class Config:
+        protected_namespaces = ()
+        json_schema_extra = {}
+    
     Title: str = "Software Design Document"
     HighLevelSystemDesign: str = Field(
         title="High-Level System Design",
@@ -63,6 +68,13 @@ class SDDSchema(Document):
         title="Orchestration Implementation Details",
         description="""If this is a data and analytics application, outline how various components of the system will be coordinated and managed to ensure seamless data processing and workflow execution.
         ALWAYS write step-by-step DETAILED instructions for implementing the orchestration process.
+        """,
+        default_factory=str
+    )
+    API: str = Field(
+        title="API Details",
+        description="""Outline the APIs to be created.
+        ALWAYS write step-by-step DETAILED instructions for implementing them.
         """,
         default_factory=str
     )

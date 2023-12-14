@@ -1,7 +1,8 @@
 # Configuration of app types
 
-Appgenpro currently can be configured/extended with the config JSON files under `examples`. An example of this is at `examples/biapp/bi_app.json`.
-For each app type, create a new configuration file with a team and tasks that team members will perform (similar apps will use the same configuration). You can change the config and other details at `appgenpro.py` before running.
+Appgenpro currently can be configured/extended with the config JSON files under `examples`. An example of this is at `examples/app_name/app_config.json` or `examples/app_name/app_inplement_only_config.json`.
+
+For each app type, create a new configuration file with a team and tasks that team members will perform (similar apps will use the same configuration). You can change the config and other details at `appgenpro.py` or `chat_appgentpro.py` before running.
 
 The JSON file will include the following configurations:
 
@@ -12,7 +13,8 @@ The JSON file will include the following configurations:
     - `watch_list` is a list of role names (the `role` of the roles). This means that whenever this specific role sends a message, our role will be able to "think" about using one of the specified `actions` and act accordingly. You must specify `watch_list` if you specified any `actions`. If there are no `watch_list` then the agent will not act, it will only be capable of making LLM calls and following its prefix template to execute tasks.
     - `actions` is a list of actions that must be implemented as a class under `appgen/actions`. These actions will be ran by the agent if the agent is talking to any role specified in `watch_list` and the action is appropriate to execute given the context of the conversation at the time. 
 
-2. `tasks` is a list of dictionaries. This list describes the `TaskChain` that will be executed to build a particular app. Each dictionary represents a `TaskChain` object with configurable fields:
+
+2. `tasks` is a list of dictionaries. This list describes the `Tasks` that will be executed to build a particular app. The tasks comes with configurable fields:
     - `name` of the task. This must be an implemented class under `appgen/tasks`.
     - `description` of what the task does.
     - `assistant_role_name` is the assistant agent role that will work on the task. The role name must be specified in the `team`.

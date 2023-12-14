@@ -1,3 +1,4 @@
+
 [project]
 # Whether to enable telemetry (default: true). No personal data is collected.
 enable_telemetry = true
@@ -29,13 +30,13 @@ multi_modal = true
 
 [UI]
 # Name of the app and chatbot.
-name = "Chatbot"
+name = "appgenpro AI Chatbot"
 
 # Show the readme while the conversation is empty.
 show_readme_as_default = true
 
 # Description of the app and chatbot. This is used for HTML tags.
-# description = ""
+# description = "Say it, have it! Create any app in minutes"
 
 # Large size content are by default collapsed for a cleaner ui
 default_collapse_content = true
@@ -45,9 +46,6 @@ default_expand_messages = false
 
 # Hide the chain of thought details from the user in the UI.
 hide_cot = false
-
-# Link to your github repo. This will add a github button in the UI's header.
-# github = ""
 
 # Specify a CSS file that can be used to customize the user interface.
 # The CSS file can be served from the public directory or via an external link.

@@ -162,6 +162,6 @@ async def mermaid_to_file(mermaid_code, output_file_without_suffix, width=2048, 
 
 # if __name__ == "__main__":
 #     loop = asyncio.new_event_loop()
-#     result = loop.run_until_complete(mermaid_to_file(MMC1, PROJECT_ROOT / f"{CONFIG.mermaid_engine}/1"))
-#     result = loop.run_until_complete(mermaid_to_file(MMC2, PROJECT_ROOT / f"{CONFIG.mermaid_engine}/1"))
+#     result = loop.run_until_complete(mermaid_to_file(MMC1, ROOT / f"{CONFIG.mermaid_engine}/1"))
+#     result = loop.run_until_complete(mermaid_to_file(MMC2, ROOT / f"{CONFIG.mermaid_engine}/1"))
 #     loop.close()

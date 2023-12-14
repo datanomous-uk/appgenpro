@@ -56,6 +56,7 @@ When you find an answer, verify the answer carefully. Include verifiable evidenc
 """
 
 
+
 class RoleSetting(BaseModel):
     """Role Settings"""
     role: str
@@ -68,6 +69,12 @@ class RoleSetting(BaseModel):
     def __repr__(self):
         return self.__str__()
     
+
+
+'''
+       Facilitating complex interactions in an AI-driven environment. 
+       It involves the use of roles, agents, and actions, presumably to execute tasks or respond to user inputs in a chat or task management system. 
+'''
 
 class Role:
     """Role/Agent"""
@@ -110,6 +117,20 @@ class Role:
             self._react
         )
 
+
+    """
+    Initializes the React agent.
+
+    Args:
+        max_consecutive_auto_reply (int, optional): The maximum number of consecutive auto replies. Defaults to 10.
+        human_input_mode (str, optional): The mode for human input. Defaults to "NEVER".
+        react_assistant_instructions (str, optional): The instructions for the React assistant. Defaults to "".
+        num_of_react_loops (int, optional): The number of loops for the React agent. Defaults to 1.
+        **kwargs: Additional keyword arguments.
+
+    Returns:
+        None
+    """
     def init_react_agent(
             self, 
             max_consecutive_auto_reply=10, 
@@ -118,19 +139,7 @@ class Role:
             num_of_react_loops: Optional[int]=1,
             **kwargs
     ):
-        """
-        Initializes the React agent.
 
-        Args:
-            max_consecutive_auto_reply (int, optional): The maximum number of consecutive auto replies. Defaults to 10.
-            human_input_mode (str, optional): The mode for human input. Defaults to "NEVER".
-            react_assistant_instructions (str, optional): The instructions for the React assistant. Defaults to "".
-            num_of_react_loops (int, optional): The number of loops for the React agent. Defaults to 1.
-            **kwargs: Additional keyword arguments.
-
-        Returns:
-            None
-        """
         self.num_of_react_loops = num_of_react_loops
 
         user_agent_params = dict(  
@@ -165,27 +174,30 @@ class Role:
         else:
             self._react_assistant = AssistantAgent(**react_agent_params)
 
+
+
+    """
+    React to incoming messages from a recipient.
+
+    The recipient first thinks, then the action is executed.
+
+    Args:
+        recipient (Optional[Agent]): The recipient of the messages. Defaults to None.
+        messages (Optional[List[Dict]]): The list of messages to react to. Defaults to None.
+        sender (Optional[Agent]): The sender of the messages. Defaults to None.
+        config (Optional[GroupChat]): The configuration for the group chat. Defaults to None.
+
+    Returns:
+        Union[str, Dict, None]: The reaction response, or None if there was no reaction.
+    """
+        
     def _react(self,
             recipient: Optional[Agent] = None,
             messages: Optional[List[Dict]] = None,
             sender: Optional[Agent] = None,
             config: Optional[GroupChat] = None
         ) -> Union[str, Dict, None]:
-        """
-        React to incoming messages from a recipient.
 
-        The recipient first thinks, then the action is executed.
-
-        Args:
-            recipient (Optional[Agent]): The recipient of the messages. Defaults to None.
-            messages (Optional[List[Dict]]): The list of messages to react to. Defaults to None.
-            sender (Optional[Agent]): The sender of the messages. Defaults to None.
-            config (Optional[GroupChat]): The configuration for the group chat. Defaults to None.
-
-        Returns:
-            Union[str, Dict, None]: The reaction response, or None if there was no reaction.
-        """
-        
     
         client = recipient.client if config is None else config
         if messages is None:
@@ -222,6 +234,24 @@ class Role:
             
             return False, "TERMINATE"    
 
+
+
+    """
+    Executes the thinking process for the agent by deciding on what
+    action to perform next.
+
+    Args:
+        messages (List[Dict]): The list of messages received by the agent.
+        recipient (Optional[Agent]): The recipient agent for the response.
+        sender (Optional[Agent]): The sender agent for the response.
+        client (Optional[Any]): The client used for communication.
+
+    Returns:
+        None: This function does not return anything.
+
+    Raises:
+        None: This function does not raise any exceptions.
+    """
     def _think(
             self, 
             messages: List[Dict], 
@@ -229,22 +259,7 @@ class Role:
             sender: Optional[Agent] = None, 
             client: Optional[Any] = None
         ) -> None:
-        """
-        Executes the thinking process for the agent by deciding on what
-        action to perform next.
 
-        Args:
-            messages (List[Dict]): The list of messages received by the agent.
-            recipient (Optional[Agent]): The recipient agent for the response.
-            sender (Optional[Agent]): The sender agent for the response.
-            client (Optional[Any]): The client used for communication.
-
-        Returns:
-            None: This function does not return anything.
-
-        Raises:
-            None: This function does not raise any exceptions.
-        """
         # if len(self.tools) == 1:
         #     return "", 0
         is_empty_msg = messages[-1].get("content", "").lower() == ""

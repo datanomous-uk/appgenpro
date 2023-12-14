@@ -1,29 +1,29 @@
 from __future__ import annotations
 from .task import Task
-from .analyze_data import AnalyzeData
-from .gather_requirements import GatherRequirements
+from .data_analysis import DataAnalysis
+from .requirements_gathering import RequirementsGathering
 from .data_modelling import DataModelling
-from .design_solution import DesignSolution
-from .plan_development import PlanDevelopment
-from .implement_solution import ImplementSolution
+from .solution_design import SolutionDesign
+from .technical_design import TechnicalDesign
+from .implementation import Implementation
 
 __all__ = [
     "Task",
-    "GatherRequirements",
+    "RequirementsGathering",
     "DataModelling",
-    "DesignSolution",
-    "PlanDevelopment",
-    "ImplementSolution",
-    "AnalyzeData",
+    "SolutionDesign",
+    "TechnicalDesign",
+    "Implementation",
+    "DataAnalysis",
 ]
 
 tasks = {
-    "GatherRequirements": GatherRequirements,
+    "RequirementsGathering": RequirementsGathering,
     "DataModelling": DataModelling,
-    "DesignSolution": DesignSolution,
-    "PlanDevelopment": PlanDevelopment,
-    "ImplementSolution": ImplementSolution,
-    "AnalyzeData": AnalyzeData
+    "SolutionDesign": SolutionDesign,
+    "TechnicalDesign": TechnicalDesign,
+    "Implementation": Implementation,
+    "DataAnalysis": DataAnalysis
 }
 
 def get_task(name):

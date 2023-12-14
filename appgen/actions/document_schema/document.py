@@ -18,6 +18,9 @@ class Document(BaseModel):
     the subsection.
     """
 
+    class Config:
+        protected_namespaces = ()
+        json_schema_extra = {}
     @staticmethod
     def get_format_example(**kwargs):
         """

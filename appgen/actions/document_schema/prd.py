@@ -3,6 +3,11 @@ from appgen.actions.document_schema import Document
 
 
 class PRDSchema(Document):
+
+    class Config:
+        protected_namespaces = ()
+        json_schema_extra = {}
+
     Title: str = "Requirements Document"
     Purpose: str = Field(
         title="Purpose and Scope",
@@ -64,6 +69,11 @@ class PRDSchema(Document):
         description="Provide a clear description of the application's user interface requirements. If the original requirements are vague, make assumptions and provide reasoning.",
         default_factory=list
     )
+    API: list = Field(
+        title="APIs",
+        description="Provide a list of APIs to be fulfilled by this application. Specify the purpose of each API.",
+        default_factory=list
+    )
     UserStories: list = Field(
         title="User Stories",
         description="Provide a list of user stories to be fulfilled by this application. Specify the purpose of each user story. You can use the example user stories provided in the context as reference.",
@@ -89,7 +99,7 @@ class PRDSchema(Document):
                 "..."
             ],
             NonFunctionalRequirements=[
-                "A microservices architecture will be used for the data pipeline. ...",
+                "An ETL architecture will be used for the data pipeline. ...",
                 "The data will be ...",
                 "The data will be modelled using ...",
                 "..."
@@ -126,8 +136,12 @@ class PRDSchema(Document):
                 "The application will be orchestrated using ....",
                 " ... "
             ],
+            API=[
+                "The application will use the following APIs ....",
+                " ... "
+            ],
             UIRequirements=[
-                "The application will be accessed using ....",
+                "The application will be accessed by ....",
                 "The UI will have the following functionalities ...",
                 " .... "
             ],

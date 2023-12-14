@@ -16,17 +16,21 @@ def push_to_github(
     repo = None
 
 
+
     try:
         repo = user.get_repo(repository_name)
-        repo_url = repo.clone_url
+        repo.delete()  # This deletes the repository
+        print(f"Repository '{repository_name}' existed and was deleted.")
     except GithubException as e:
-        if e.status == 404:  # Typically 404 status is for Not Found
-            print(f"Repository '{repository_name}' does not exist. Creating a new repository.")
-            repo = user.create_repo(repository_name)
-            repo_url = repo.clone_url
+        if e.status == 404:  # Repository does not exist
+            print(f"Repository '{repository_name}' does not exist.")
         else:
-            raise  # Re-raises the exception if it's not a 'Not Found' error
+            raise  # Re-raises the exception for any other errors
 
+    # Create the repository again
+    repo = user.create_repo(repository_name)
+    repo_url = repo.clone_url
+    print(f"Repository '{repository_name}' created at {repo_url}")
 
 
     if os.path.exists(local_folder_path):
