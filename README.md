@@ -43,8 +43,8 @@ https://github.com/datanomous-uk/appgenpro/assets/46131251/3396a2c4-9aa7-464e-91
 ## TABLE OF CONTENTS
 
 - [Setup](#SETUP)
-- [Usage_For_developers](#USAGE:For_developers)
-- [Usage_For_non-technical_users](#USAGE:For_non-technical_users)
+- [Usage_For_developers](#USAGE_Developers)
+- [Usage_For_non-technical_users](#USAGE_Non_technical_users)
 - [Contact](#CONTACT)
 - [Citiations](#CITATIONS)
 
@@ -86,7 +86,7 @@ npm install @mermaid-js/mermaid-cli
 
 
 
-# USAGE:For_developers
+# USAGE_Developers
 
 To use appgenpro, you can either run it via the command line or through a Chat UI:
 
@@ -109,7 +109,7 @@ To use appgenpro, you can either run it via the command line or through a Chat U
 ```
 
 
-# USAGE:For_non-technical_users
+# USAGE_Non_technical_users
 
 1. **Full Development Lifecycle
 
