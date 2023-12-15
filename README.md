@@ -43,8 +43,8 @@ https://github.com/datanomous-uk/appgenpro/assets/46131251/3396a2c4-9aa7-464e-91
 ## TABLE OF CONTENTS
 
 - [Setup](#SETUP)
-- [Usage](#USAGE:For_developers)
-- [Usage](#USAGE:For_non-technical_users)
+- [Usage_For_developers](#USAGE:For_developers)
+- [Usage_For_non-technical_users](#USAGE:For_non-technical_users)
 - [Contact](#CONTACT)
 - [Citiations](#CITATIONS)
 
