@@ -43,7 +43,7 @@ https://github.com/datanomous-uk/appgenpro/assets/46131251/3396a2c4-9aa7-464e-91
 ## TABLE OF CONTENTS
 
 - [Setup](#SETUP)
-- [Usage](#USAGE:For_technical_experts)
+- [Usage](#USAGE:For_developers)
 - [Usage](#USAGE:For_non-technical_users)
 - [Contact](#CONTACT)
 - [Citiations](#CITATIONS)
@@ -86,50 +86,36 @@ npm install @mermaid-js/mermaid-cli
 
 
 
-# USAGE:For_technical_experts
+# USAGE:For_developers
 
 To use appgenpro, you can either run it via the command line or through a Chat UI:
 
-1. **Command Line: Run Full Application Lifecycle**
+1. **Full Development Lifecycle
 
 ```shell
-python appgenpro_cli.py --idea "Type your app idea..." -- config f"{EXAMPLES_ROOT}/flask_app/app_implement_only_config.json" --name "flask_app"
+./run.sh  'Create an application with secure API endpoints only that enables admin users to create advanced dynamic forms and then allow business users to login, and access those  forms to submit them in. The form data will be stored in the database.'  flask_app examples/flask_app/app_config.json full no yes no
 ```
 
-1.1 **Command Line: Run Iterative Application Lifecycle with the available Requirements and Design Documents** 
+2. ** Analysis and Design Only
 
 ```shell
-python appgenpro_cli.py --config 'examples/flask_app/app_config_implement_only.json' --idea 'Create an application with secure API endpoints only that enables admin users to create advanced dynamic forms and users to fill them in. Store the data in database.' --name 'flask_app' --backlog 'flask_app/docs/backlog.md'
+./run.sh 'Create an application with secure API endpoints only that enables admin users to create advanced dynamic forms and then allow business users to login, and access those  forms to submit them in. The form data will be stored in the database.' flask_app examples/flask_app/app_config_design.json design no_backlog yes no
 ```
 
-1.2 **Command Line: Run Iterative Application Lifecycle with the available Requirements and Design Documents and Github Token to push the generated code**
-```shell
-python appgenpro_cli.py --config 'examples/flask_app/app_config_implement_only.json' --idea 'Create an application with secure API endpoints only that enables admin users to create advanced dynamic forms and users to fill them in. Store the data in database.' --name 'flask_app' --github_token 'your_github_token' --backlog 'flask_app/docs/backlog.md'
-
-```
-
-1.3 **Command Line: Or see options to decide **
+3. ** Implement Only
 
 ```shell
-python appgenpro_cli.py --help
+./run.sh  'Create an application with secure API endpoints only that enables admin users to create advanced dynamic forms and then allow business users to login, and access those  forms to submit them in. The form data will be stored in the database.' flask_app examples/flask_app/app_config_implement.json implement 'flask_app/docs/backlog.md' no no
 ```
-
-
 
 
 # USAGE:For_non-technical_users
 
-1. **Chat UI: Run Full Application Lifecycle**
-
-Update the `appgenpro_chat_config.json` with the target application specifics
-
-Run AppGenPro with a Chat UI for an enhanced user experience:
+1. **Full Development Lifecycle
 
 ```shell
-chainlit run appgenpro_chat.py 
+./run.sh  ‘NA ‘NA’ full no yes yes
 ```
-
-
 
 
 

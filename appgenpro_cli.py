@@ -1,7 +1,7 @@
 import argparse
 import traceback
 from pathlib import Path
-import json
+import openai
 from appgen import App
 from appgen.utils.const import WORKSPACE_ROOT, EXAMPLES_ROOT
 from appgen.config import CONFIG
@@ -41,8 +41,12 @@ def main():
         msg = f"Application is generated (and deployed) successfully! Thank you for using AppGenPro! Final estimated cost: ${CONFIG.total_cost:.2f}"
         logger.debug(msg)
         logger.info(msg)
-    except:
-        err_msg = f"Unexpected error: {traceback.format_exc()}"
+    except Exception as e:
+        if isinstance(e, openai.RateLimitError):
+            err_msg = f"Open AI Rate limit exceeded: {traceback.format_exc()}"
+        else: 
+            err_msg = f"Unexpected error: {traceback.format_exc()}"
+
         logger.debug(err_msg)
         logger.error(err_msg)
 

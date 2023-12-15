@@ -72,7 +72,7 @@ class Environment:
 
             backlog_class = docs.get("backlog", None)
             if backlog_class:
-                dependencies = backlog_class.RequiredPythonPackages
+                dependencies = backlog_class.RequiredPackages
                 requirements_file_path = self.directory / "requirements.txt"
                 requirements_file_path.write_text(dependencies)
                 logger.debug("Requirements.txt saved.")

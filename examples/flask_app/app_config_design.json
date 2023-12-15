@@ -1,0 +1,93 @@
+{
+    "_comments": [
+            "MUST HAVE ROLES: Client, Full Development Team",
+            "MUST HAVE TASKS: RequirementsGathering, SolutionDesign, TechnicalDesign"
+    ],
+    "team": [
+        { 
+            "role": "Client",
+            "goal": "To create a fully-working application with high-level requirements.",
+            "constraints": "I can provide feedback.",
+            "human_input_mode": "ALWAYS"
+        },
+        { 
+            "role": "BusinessAnalyst",
+            "goal": "As a Business Analyst, you goal is to analyze business requirements to collect the functional requirements for a given application, and create a requirements document. You must first directly ask the client to provide the details. DO NOT jump straight to writing the document. You MUST ALWAYS ask the client questions about any vague or unclear information and get their replies before writing the requirements document.",
+            "constraints": "You should ONLY be working on collecting requirements.",
+            "watch_list": ["Client"],
+            "actions": ["WriteWebRequirementsDocument"],
+            "react_assistant_instructions": "Analyze the given details to make sure an appropriate requirements document is created for an end-to-end application based on best practices and enterprise standards."
+        },
+        { 
+            "role": "SolutionArchitect",
+            "goal": "As a Solution Architect, your goal is to capture non-functional requirements for the given application that will be deployed to cloud. ",
+            "constraints": "You should ONLY be working on designing applications. You should NEVER be writing code or implementing the project. ",
+            "watch_list": ["BusinessAnalyst"],
+            "actions": ["WriteWebTechnicalDesignDocument"]
+        },
+        {
+            "role": "SeniorEngineer",
+            "goal": "As a Senior Engineer, your goal is to make sure that the designed technical solution for the client's request is successfully implemented. This is done in a pair programming paradigm with the Junior Engineers. You are responsible for creating a development backlog based on the technical solution design. You are also responsible for guiding the Junior Engineer to complete the tasks in development backlog. You MUST check the code if it does not work provide feedback back to Junior Engineer. You MUST ensure the quality of the code is good. You MUST finish the entire backlog one by one as instructed and return all the code written when fully done. ",
+            "constraints": "You MUST ONLY be mentoring the Junior Engineer. You MUST ONLY be working on applications.",
+            "watch_list": ["SolutionArchitect"],
+            "actions": ["WriteWebDevelopmentBacklogDocument"]
+        }
+    ],
+    "tasks" : [
+        {
+            "name": "RequirementsGathering",
+            "description": "Gathering Requirements and User Stories",
+            "assistant_role_name": "BusinessAnalyst",
+            "user_role_name": "Client",
+            "task_prompt": "Based on the client's request ({request_prompt}), and the organization standards: {organization_standards}, you must now understand the requirements of the client by asking them a FEW clarifying questions (the less the better). For each question you ask, you must also provide an answer you assume the client would give you and ask them if this answer is correct. You must in the end reply with the completed Requirements Document with all functional, non-functional requirements, and detailed User Stories in Markdown format.",
+            "placeholders": {
+                "organization_standards": [
+                    "Objectives and Scope:What are the primary objectives of the web application? What specific problems does the application aim to solve? Who are the target users of the application? Are there any existing systems or applications that this project needs to integrate with?",
+                    "UX: What are the key functionalities that the user interface must support?",
+                    "Non-Functionals: Performance, scalability, availability, security, compliance, portability, etc..?",
+                    "Future plans: Are there plans for future features or expansions post-launch?"
+                ]
+            }
+        },
+        {
+            "name": "SolutionDesign",
+            "description": "Designing The Technical Solution",
+            "assistant_role_name": "SolutionArchitect",
+            "user_role_name": "BusinessAnalyst",
+            "task_prompt": "Based on the requirements document ({requirements}), and the organization standards ({organization_standards}), you must now create a solution design document that will be used to develop a solution for the client's request. You must first evaluate what you have created and reply with a solution that covers all functionalities in the requirements. You must in the end reply with the completed Solution Design Document in Markdown format.",
+            "placeholders": {
+                "organization_standards": [
+                    "Architecture: Web applications are designed using a modular microservices architecture based on Domain Driven Design. Ensure components are loosely coupled and can be easily replaced or updated. Each microservice should have its own set of endpoints and should communicate with others via API calls."
+                ]
+            }
+        },
+        {
+            "name": "TechnicalDesign",
+            "description": "Planning the Development Backlog",
+            "assistant_role_name": "SeniorEngineer",
+            "user_role_name": "SolutionArchitect",
+            "task_prompt": "Based on the design document ({design}), and the organization standards ({organization_standards}), create a detailed development backlog and executable tasks and then translate it into executable pseudocode for each class to be implemented by other engineers so that the client's request can be successfully implemented. You must in the end reply with the completed Development Backlog in Markdown format.",
+            "placeholders": {
+                "organization_standards": [
+                    "Create components: Identify the loosely coupled components and implement the related classes in the 'src' directory under the folder name corresponding to the component. Ensure components are loosely coupled and can be easily replaced or updated. Use a component library for common UI components.",
+                    "Create Backend Services: Identify the loosely coupled components and implement each component with related classes and functions. Use pseucodes already provided to implement class methods. Ensure components are loosely coupled and can be easily replaced or updated. Each microservice should be created under the folder name corresponding to the component under the 'src' directory. Each class will be implemented under the folder name corresponding to the component under the 'src' directory. Each microservice should have its own set of endpoints and should communicate with others through an API. Use HTTP methods explicitly, and be organized around resources. Versioning of APIs is crucial for backward compatibility.",
+                    "Create UI: Implement the UI logic based on the techology stack and related design patterns (such as MVC) under the 'src' directory.  Separate static assets in the 'public' directory. Ensure a consistent coding style and format using tools like ESLint and Prettier.",
+                    "Create Starter App: Create main.py etc to call all backendservices under 'src' folder with sample requests to test the backend services.",
+                    "Testing: Write and Run unit tests",
+                    "Techology Stack: Use Python Language. Flask framework to create APIs. SQLAlchemy for database management. React for UI. No API Gateway is required.",
+                    "UI: Use appropriate design patterns. Design for various screen sizes and devices, ensuring responsiveness. Follow accessibility guidelines to make the application usable by as many people as possible. Use semantic HTML and provide alternative texts for media.",
+                    "RESTful API Design: RESTful APIs should be stateless, use HTTP methods explicitly, and be organized around resources. Versioning of APIs is crucial for backward compatibility.",
+                    "Authentication: Use JWT based stateless authentication in RESTful APIs. Use extensions like Flask-Login for session management and Flask-HTTPAuth for HTTP authentication. Basic Authentication is used for user login.",
+                    "Database Access: Use SQLLite as database backends. Microservices should use the same shared database for simplicity. Use ORM (Object-Relational Mapping) for database interactions to abstract database engine specifics, allowing flexibility in changing database technologies.",
+                    "Error Handling and Logging: Implement consistent error handling across microservices. Use structured logging to provide clear, debuggable output. Ensure logs are centralized for easy monitoring. Include correlation IDs in logs for tracing requests across services.",
+                    "State Management and API Integration: Use centralized state management to handle application state more predictably. When integrating with backend APIs, handle asynchronous operations and potential errors gracefully. Cache API responses where appropriate to improve performance.",
+                    "Configuration Management: Externalize configuration from the codebase. Use environment variables or centralized configuration services to manage configurations. This approach allows the same application to be deployed in different environments without code changes.",
+                    "Scalability and Performance: Design microservices to be stateless to enable horizontal scaling. Monitor performance metrics and use load balancing to distribute traffic. Optimize resource usage to handle varying loads efficiently.",
+                    "Dockerization: Each microservice, whether an API or a frontend application, should have its Dockerfile for containerization. Use docker-compose for defining and running multi-container Docker applications, ensuring easy management of services and their dependencies.",
+                    "Deployment: Deploy the dockers to render.com" 
+                ]   
+            }
+
+        }
+    ]
+}

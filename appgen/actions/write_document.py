@@ -6,10 +6,13 @@ import asyncio
 
 from appgen.actions import Action
 from appgen.actions.document_schema import (
-    PRDSchema,
-    BacklogSchema,
-    SDDSchema,
-    DataModelSchema
+    PRDDataSchema,
+    BacklogDataSchema,
+    SDDDataSchema,
+    DataModelSchema,
+    PRDWebSchema,
+    BacklogWebSchema,
+    SDDWebSchema
 )
 from appgen.utils import logger, json_to_markdown
 from appgen.utils.cost import estimate_cost_of_completion
@@ -30,7 +33,6 @@ YOU MUST consider the context and the requirements and adapt it accordingly to t
 
 If the requirements are unclear, ensure minimum viability and avoid excessive design. 
 Output a JSON STRING and do NOT wrap the JSON string in quotes or backticks. 
-YOU MUST output JUST the JSON as PLAIN python STRING as in the format example.
 """
 
 class WriteDocument(Action):
@@ -101,13 +103,13 @@ class WriteDocument(Action):
 
 
 
-class WriteRequirementsDocument(WriteDocument):
+class WriteDataRequirementsDocument(WriteDocument):
 
     def __init__(
         self,
         name:str = "write_requirements_document", 
         description:str = "Write a Requirements Document and return the result.",  
-        document_schema:Type[BaseModel] = PRDSchema,
+        document_schema:Type[BaseModel] = PRDDataSchema,
         document_name:str = "prd",
         document_prompt_template:str = DOCUMENT_PROMPT_TEMPLATE,
         **kwargs
@@ -129,13 +131,13 @@ class WriteDataModelDocument(WriteDocument):
         super().__init__(name, description, document_schema, document_name, document_prompt_template)
 
 
-class WriteTechnicalDesignDocument(WriteDocument):
+class WriteDataTechnicalDesignDocument(WriteDocument):
 
     def __init__(
         self,
         name = "write_design_document",
         description = "Write a design document and return the result.",
-        document_schema = SDDSchema,
+        document_schema = SDDDataSchema,
         document_name = "sdd",
         document_prompt_template:str = DOCUMENT_PROMPT_TEMPLATE,
         **kwargs
@@ -143,13 +145,57 @@ class WriteTechnicalDesignDocument(WriteDocument):
         super().__init__(name, description, document_schema, document_name, document_prompt_template)
 
 
-class WriteDevelopmentBacklogDocument(WriteDocument):
+class WriteDataDevelopmentBacklogDocument(WriteDocument):
 
     def __init__(
         self,
         name = "write_backlog_document",
         description = "Write a backlog document and return the result.",
-        document_schema = BacklogSchema,
+        document_schema = BacklogDataSchema,
+        document_name = "backlog",
+        document_prompt_template:str = DOCUMENT_PROMPT_TEMPLATE,
+        **kwargs
+    ):
+        super().__init__(name, description, document_schema, document_name, document_prompt_template)
+
+
+
+class WriteWebRequirementsDocument(WriteDocument):
+
+    def __init__(
+        self,
+        name:str = "write_requirements_document", 
+        description:str = "Write a Requirements Document and return the result.",  
+        document_schema:Type[BaseModel] = PRDWebSchema,
+        document_name:str = "prd",
+        document_prompt_template:str = DOCUMENT_PROMPT_TEMPLATE,
+        **kwargs
+    ):
+        super().__init__(name, description, document_schema, document_name, document_prompt_template)
+
+
+
+class WriteWebTechnicalDesignDocument(WriteDocument):
+
+    def __init__(
+        self,
+        name = "write_design_document",
+        description = "Write a design document and return the result.",
+        document_schema = SDDWebSchema,
+        document_name = "sdd",
+        document_prompt_template:str = DOCUMENT_PROMPT_TEMPLATE,
+        **kwargs
+    ):
+        super().__init__(name, description, document_schema, document_name, document_prompt_template)
+
+
+class WriteWebDevelopmentBacklogDocument(WriteDocument):
+
+    def __init__(
+        self,
+        name = "write_backlog_document",
+        description = "Write a backlog document and return the result.",
+        document_schema = BacklogWebSchema,
         document_name = "backlog",
         document_prompt_template:str = DOCUMENT_PROMPT_TEMPLATE,
         **kwargs

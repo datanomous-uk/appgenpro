@@ -15,7 +15,7 @@
             "goal": "As a Senior Engineer, your goal is to make sure that the designed technical solution for the client's request is successfully implemented. This is done in a pair programming paradigm with the Junior Engineers. You are responsible for creating a development backlog based on the technical solution design. You are also responsible for guiding the Junior Engineer to complete the tasks in development backlog. You MUST check the code if it does not work provide feedback back to Junior Engineer. You MUST ensure the quality of the code is good. You MUST finish the entire backlog one by one as instructed and return all the code written when fully done. ",
             "constraints": "You MUST ONLY be mentoring the Junior Engineer. You MUST ONLY be working on web applications.",
             "watch_list": ["SolutionArchitect"],
-            "actions": ["WriteDevelopmentBacklogDocument"]
+            "actions": ["WriteWebDevelopmentBacklogDocument"]
         },
         {
             "role": "JuniorEngineer",
@@ -34,9 +34,10 @@
             "task_prompt": "Based on the development backlog ({backlog}), and the organization standards ({organization_standards}), write executable code only ensuring adherence to the project's full context. Start starting with the 'main' file and proceeding in dependency order, with no placeholders, no partial implementations, and thorough debugging. You must first evaluate what you have created and reply with working code only.",
             "placeholders": {
                 "organization_standards": [
-                        "UI Design patterns: Implement the react design patterns.",
+                        "UI Design patterns: For UI development, analyze and implement react design patterns at [https://legacy.reactjs.org/docs/design-principles.html]",
+                        "API best practices: For API development, analyze and implement best practices at [https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design] and [https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-implementation] and [https://swagger.io/resources/articles/best-practices-in-api-design/]",
                         "React:Follow the official React guidelines for component structure, state management, and hooks. Use JSX properly and keep components small and focused. Apply linting tools like ESLint for code quality.",
-                        "Python REST APIs: Adhere to PEP 8 standards for Python code style. Use frameworks like Flask or Django REST framework effectively. Ensure proper error handling and use HTTP status codes correctly.",
+                        "Python REST APIs: Adhere to PEP 8 standards for Python code style. Use Flask to build REST APIs. Ensure proper error handling and use HTTP status codes correctly.",
                         "Node.js: Use asynchronous programming models properly. Structure your project clearly (e.g., MVC pattern). Apply linting with tools like ESLint.",
                         "Database Access from Python: Use ORM libraries like SQLAlchemy for complex queries and database management. Ensure secure database connections and handle exceptions. Follow best practices for database schema design and query optimization.",
                         "Dockerization Example code: [```\nFROM node:14\nWORKDIR /usr/src/app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]\n```\nThis Dockerfile creates a Docker image for a Node.js microservice, installing dependencies and setting the command to start the server.]",

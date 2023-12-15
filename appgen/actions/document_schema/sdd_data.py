@@ -6,12 +6,10 @@ from appgen.utils.mermaid import mermaid_to_file
 from appgen.utils import logger, json_to_markdown
 import json
 
-class SDDSchema(Document):
+class SDDDataSchema(Document):
 
-    class Config:
-        protected_namespaces = ()
-        json_schema_extra = {}
     
+
     Title: str = "Software Design Document"
     HighLevelSystemDesign: str = Field(
         title="High-Level System Design",
@@ -100,7 +98,7 @@ class SDDSchema(Document):
         default_factory=str
     )
 
-    
+  
     async def parse(self, resources_path:Path=Path("resources")):
         class_diagrams = self.ClassDiagrams
         program_flow = self.ProgramFlow
@@ -132,9 +130,9 @@ class SDDSchema(Document):
 
     @staticmethod
     def get_format_example(**kwargs):
-        sdd = SDDSchema(
+        sdd = SDDDataSchema(
             Title="Software Design Document",
-            HighLevelSystemDesign="Document the solution based on the architecture suggested as standards.",
+            HighLevelSystemDesign="Document the solution based on the architecture suggested.",
             ClassDiagrams="""```mermaid
                 classDiagram
                     class ClassName{

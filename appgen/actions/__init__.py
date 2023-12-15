@@ -2,30 +2,39 @@ from __future__ import annotations
 from .action import Action
 from .write_document import (
     WriteDocument,
-    WriteRequirementsDocument,
+    WriteWebRequirementsDocument,
     WriteDataModelDocument,
-    WriteTechnicalDesignDocument,
-    WriteDevelopmentBacklogDocument
+    WriteWebTechnicalDesignDocument,
+    WriteWebDevelopmentBacklogDocument,
+    WriteDataRequirementsDocument,
+    WriteDataTechnicalDesignDocument,
+    WriteDataDevelopmentBacklogDocument
 )
 from .write_code import WriteCode
 from .analyze_data import AnalyzeData
 
 __all__ = [
     "WriteDocument",
-    "WriteRequirementsDocument",
+    "WriteWebRequirementsDocument",
     "WriteDataModelDocument",
-    "WriteTechnicalDesignDocument",
-    "WriteDevelopmentBacklogDocument",
+    "WriteWebTechnicalDesignDocument",
+    "WriteWebDevelopmentBacklogDocument",
+    "WriteDataRequirementsDocument",
+    "WriteDataTechnicalDesignDocument",
+    "WriteDataDevelopmentBacklogDocument",
     "WriteCode",
     "AnalyzeData",
 ]
 
 actions = {
     "WriteDocument": WriteDocument,
-    "WriteRequirementsDocument": WriteRequirementsDocument,
+    "WriteWebRequirementsDocument": WriteWebRequirementsDocument,
     "WriteDataModelDocument": WriteDataModelDocument,
-    "WriteTechnicalDesignDocument": WriteTechnicalDesignDocument,
-    "WriteDevelopmentBacklogDocument": WriteDevelopmentBacklogDocument,
+    "WriteWebTechnicalDesignDocument": WriteWebTechnicalDesignDocument,
+    "WriteWebDevelopmentBacklogDocument": WriteWebDevelopmentBacklogDocument,
+    "WriteDataRequirementsDocument": WriteDataRequirementsDocument,
+    "WriteDataTechnicalDesignDocument": WriteDataTechnicalDesignDocument,
+    "WriteDataDevelopmentBacklogDocument": WriteDataDevelopmentBacklogDocument,
     "WriteCode": WriteCode,
     "AnalyzeData": AnalyzeData
 }

@@ -11,6 +11,5 @@ class RequirementsGathering(Task):
 
         if "prd" in CONFIG.artifacts["docs"]:
             reqs = CONFIG.artifacts["docs"]["prd"]
-            print (f"update_environment:reqs: {reqs}")
             environment.requirements.append(reqs)
 

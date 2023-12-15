@@ -11,7 +11,7 @@
             "goal": "As a Data Analyst, you goal is to analyze data sources, collect the functional requirements for a given business intelligence application, and create a requirements document. DO NOT jump stright to analyzing data if no data sources are provided. You must first directly ask the client to provide the data sources. DO NOT jump straight to writing the document. You MUST ALWAYS ask the client questions about any vague or unclear information and get their replies before writing the requirements document. You MUST consider the full context, Organization Standards and the following criteria in your responses.",
             "constraints": "You should ONLY be working on collecting requirements. You should EXECUTE code given to you by the assistant to analyze the data source.",
             "watch_list": ["Client"],
-            "actions": ["WriteRequirementsDocument", "AnalyzeData"],
+            "actions": ["WriteDataRequirementsDocument", "AnalyzeData"],
             "react_assistant_instructions": "Load and Analyze the given Data sources to understand what the data shows and how you can possibly use it to fulfill the client's requests."
         },
         { 
@@ -26,14 +26,14 @@
             "goal": "As a Data Architect, your goal is to capture non-functional requirements for the given business intelligence application to design a robust ETL data pipeline. You MUST consider the full context, Organization Standards and the following criteria to do your job. ",
             "constraints": "You should ONLY be working on designing business intelligence applications. You should NEVER be writing code or implementing the project. ",
             "watch_list": ["DataModeler"],
-            "actions": ["WriteTechnicalDesignDocument"]
+            "actions": ["WriteDataTechnicalDesignDocument"]
         },
         {
             "role": "SeniorDataEngineer",
             "goal": "As a Senior Data Engineer, your goal is to make sure that the designed technical solution for the client's request is successfully implemented. This is done in a pair programming paradigm with the Junior Data Engineers. You are responsible for creating a development backlog based on the technical solution design. You are also responsible for guiding the Junior Data Engineer to complete the tasks in development backlog.You MUST consider the full context, Organization Standards and the following criteria to do your job. You MUST check the code if it does not work provide feedback back to Junior Data Engineer. You MUST ensure the quality of the code is good. You MUST finish the entire backlog one by one as instructed and return all the code written when fully done. ",
             "constraints": "You MUST ONLY be mentoring the Junior Data Engineer. You MUST ONLY be working on business intelligence applications.",
             "watch_list": ["DataArchitect"],
-            "actions": ["WriteDevelopmentBacklogDocument"]
+            "actions": ["WriteDataDevelopmentBacklogDocument"]
         },
         {
             "role": "JuniorDataEngineer",

@@ -6,29 +6,7 @@ from appgen.utils.mermaid import mermaid_to_file
 from appgen.utils import logger, json_to_markdown
 import json
 
-def wrap_in_backticks(input_str):
-    # Check if the input string is already wrapped in triple backticks
-    if (input_str.startswith('```\n') or input_str.startswith('```python\n')) and (input_str.endswith('```') or input_str.endswith('```\n')):
-        return input_str
-    else:
-        # Wrap the string in triple backticks
-        return f'```python\n{input_str}\n```'
-
-
-def pretty_list(input_list):
-    pretty_list = []
-    for item in input_list:
-      if isinstance(item, (tuple, list)):
-          pretty_list.append(f"**`{item[0]}`**: {item[1]}")
-
-    return pretty_list
-          
-
-class BacklogSchema(Document):
-
-  class Config:
-      protected_namespaces = ()
-      json_schema_extra = {}
+class BacklogDataSchema(Document):
 
   Title: str = "Development Backlog Document"
   PythonPackageName: str = Field(
@@ -93,7 +71,7 @@ class BacklogSchema(Document):
           
   @staticmethod
   def get_format_example(**kwargs):
-    backlog = BacklogSchema(
+    backlog = BacklogDataSchema(
       Title="Development Backlog Document",
       PythonPackageName="""```python
       package_name
@@ -155,3 +133,23 @@ class BacklogSchema(Document):
             )
 
     return backlog.model_dump_json()
+
+
+
+def wrap_in_backticks(input_str):
+    # Check if the input string is already wrapped in triple backticks
+    if (input_str.startswith('```\n') or input_str.startswith('```python\n')) and (input_str.endswith('```') or input_str.endswith('```\n')):
+        return input_str
+    else:
+        # Wrap the string in triple backticks
+        return f'```python\n{input_str}\n```'
+
+
+def pretty_list(input_list):
+    pretty_list = []
+    for item in input_list:
+      if isinstance(item, (tuple, list)):
+          pretty_list.append(f"**`{item[0]}`**: {item[1]}")
+
+    return pretty_list
+          

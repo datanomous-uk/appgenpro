@@ -2,11 +2,7 @@ from pydantic import Field
 from appgen.actions.document_schema import Document
 
 
-class PRDSchema(Document):
-
-    class Config:
-        protected_namespaces = ()
-        json_schema_extra = {}
+class PRDDataSchema(Document):
 
     Title: str = "Requirements Document"
     Purpose: str = Field(
@@ -87,7 +83,7 @@ class PRDSchema(Document):
 
     @staticmethod
     def get_format_example(**kwargs):
-        prd = PRDSchema(
+        prd = PRDDataSchema(
             Title="Requirements Document",
             Purpose="""The purpose of this document is to outline the requirements for a ... """,
             Assumptions=[

@@ -1,8 +1,6 @@
 
-
-
-import argparse
 import traceback
+import openai
 from pathlib import Path
 from appgen import App
 import chainlit as cl
@@ -86,15 +84,20 @@ async def start():
         logger.info(msg)
 
     except Exception as e: 
+        if isinstance(e, openai.RateLimitError):
+            err_msg = f"Open AI Rate limit exceeded: {traceback.format_exc()}"
+        else: 
+            err_msg = f"Unexpected error: {traceback.format_exc()}"
+    
         ## Inform the UI with the exception message
         TASK_STATUS = cl.TaskStatus.FAILED.name
         cl.run_sync(
             cl.Message(
-                content=f"**There was an unexpected error:{e}! Please check the logs for more info.**\n**Total estimated cost: ${CONFIG.total_cost:.2f}**"
+                content=f"**There was an error {err_msg}! Please check the logs for more info.**\n**Total estimated cost: ${CONFIG.total_cost:.2f}**"
             ).send()
         )
         lifecycle.update_chat_status(task_status=TASK_STATUS)
-        err_msg = f"Unexpected error: {traceback.format_exc()}"
+
         logger.debug(err_msg)
         logger.error(err_msg)
 
