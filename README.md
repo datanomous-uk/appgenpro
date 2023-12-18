@@ -1,28 +1,53 @@
 # appgenpro
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Docs](https://img.shields.io/badge/docs-8A2BE2)](https://datanomous-uk.github.io/appgenpro-docs)
 
-## Description
+## DESCRIPTION
+Transforming Application Development with appgenpro
 
-Appgenpro stands as a groundbreaking tool tailored for non-technical business professionals, enabling them to develop high-quality enterprise applications. This platform harnesses the capabilities of virtual "AI Agent" teams, each assigned to various roles in the application development process. These AI agents collaboratively work to produce outputs for each role, culminating in a functional business solution.
+In the rapidly evolving landscape of Generative AI, the leap into coding can be daunting. Traditional interfaces, like ChatGPT, often require specific know-how, turning the process of developing useful applications into a time-consuming task. 
 
-Appgenpro distinguishes itself from other similar open-source projects through its distinctive design, rooted in the autogen multi-agent framework, and its features specifically aimed at enterprise application development. As we diligently work to fulfil our roadmap, we invite the community to contribute suggestions for new features, enhancing the tool's utility and relevance for users. This collaborative approach ensures Appgenpro remains a cutting-edge and user-focused solution in the field of application development.
+Imagine ChatGPT as an eager yet inexperienced junior developer - enthusiastic and skilled in coding basics, but often unsure about navigating the complexities of application development.
 
-Please see our [docs](https://datanomous-uk.github.io/appgenpro-docs) for more information on AppGenPro and how to get started!
+
+Enter appgenpro - your solution to these challenges!
+
+**For Non-Technical Business Professionals:**
+
+- User-Friendly Interface: With appgenpro's chat interface, simply share your application idea, and watch as it orchestrates the entire development lifecycle for you. It's like having a virtual development team at your fingertips, tailored to your project's needs based on pre-set standards.
+- Intuitive Collaboration: Our AI agents, skilled in asking the right questions, will guide you through the process. They seek your feedback to refine outputs, making assumptions to ease your journey if you're not technically inclined.
+- Comprehensive Deliverables: From requirements and design documents to functional code and deployment artifacts, appgenpro covers it all. Your final application can be seamlessly pushed to GitHub or deployed to cloud platforms like render.com.
+
+
+**For Developers and Technical Experts:**
+
+- Command Line Efficiency: Dive into the full development cycle with a command-line interface, fine-tune standards, and iterate on deliverables for that perfect touch.
+- End-to-End Capability: Push your polished code directly to GitHub and deploy to any cloud service, streamlining your workflow.
+
+
+**Embracing Challenges and Future Vision:**
+
+- While appgenpro excels in creating a variety of applications, we recognize the current limitations in generating complex UI code with LLMs. Rest assured, our upcoming releases are focused on enhancing these capabilities, especially in backend development areas like APIs, microservices, BI solutions, and AI applications.
+- Our virtual development team is powered by specialized AI agents that are continually evolving. We're committed to enabling them to learn from their experiences, gaining domain expertise to further enrich and expedite the development process.
+
+
+**Join Our Journey:**
+
+As we progress along our roadmap, we invite the community to share their ideas and suggestions. Your input is invaluable in shaping appgenpro to be more versatile, user-friendly, and innovative. Together, let's redefine the frontiers of application development!
+
 
 https://github.com/datanomous-uk/appgenpro/assets/46131251/3396a2c4-9aa7-464e-9109-b2d45a00d8f1
 
 
 
-## Table of Contents
+## TABLE OF CONTENTS
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Citations](#citations)
-- [Contact](#contact)
+- [Setup](#SETUP)
+- [Usage_For_developers](#USAGE_Developers)
+- [Usage_For_non-technical_users](#USAGE_Non_technical_users)
+- [Contact](#CONTACT)
+- [Citiations](#CITATIONS)
+
 
 Please see `ROADMAP.md` for details of the aim of appgenpro and our mission.
 
@@ -30,7 +55,12 @@ Please see `DEV.md` for details on dev topics and troubleshooting tips.
 
 Please see `CONFIG.md` for details on how to configure appgenpro.
 
-## Installation
+Please see `CONTRIBUTIONS.md` for details on how to contribute to our journey.
+
+
+
+
+## SETUP
 
 To get started with AppGenPro, follow these steps:
 
@@ -50,48 +80,58 @@ pip install -r requirements.txt
 npm install @mermaid-js/mermaid-cli
 ```
 
-4. Configuration:
-* Navigate to `./appgen/config/config.yaml`.
+4. Configure `appgenpro_config.yaml` 
 * Validate the `mmdc` path by typing `ls ./node_modules/.bin/mmdc` in the terminal.
 * Update `OAI_CONFIG_LIST` and `GITHUB_TOKEN` for OpenAPI model/key and to use github.
 
-# Usage
+
+
+# USAGE_Developers
 
 To use appgenpro, you can either run it via the command line or through a Chat UI:
 
-1. **Command Line:**
+1. **Full Development Lifecycle
 
 ```shell
-python appgenpro.py --idea "Type your app idea..."
+./run.sh  'Create an application with secure API endpoints only that enables admin users to create advanced dynamic forms and then allow business users to login, and access those  forms to submit them in. The form data will be stored in the database.'  flask_app examples/flask_app/app_config.json full no yes no
 ```
 
-For additional options, use:
+2. ** Analysis and Design Only
 
 ```shell
-python appgenpro.py --help
+./run.sh 'Create an application with secure API endpoints only that enables admin users to create advanced dynamic forms and then allow business users to login, and access those  forms to submit them in. The form data will be stored in the database.' flask_app examples/flask_app/app_config_design.json design no_backlog yes no
 ```
 
-2. **Chat UI:**
-
-Run AppGenPro using Chainlit for an enhanced user experience:
+3. ** Implement Only
 
 ```shell
-chainlit run appgenpro.py
+./run.sh  'Create an application with secure API endpoints only that enables admin users to create advanced dynamic forms and then allow business users to login, and access those  forms to submit them in. The form data will be stored in the database.' flask_app examples/flask_app/app_config_implement.json implement 'flask_app/docs/backlog.md' no no
 ```
 
-# Contributing
-We welcome contributions from the community! If you'd like to contribute to this project, please follow these guidelines:
 
-1. Fork the repository.
-2. Create a new branch.
-3. Make your changes.
-4. Test your changes.
-5. Submit a pull request.
+# USAGE_Non_technical_users
 
-# License
-This project is licensed under the MIT License. You can see the details in the LICENSE file.
+1. **Full Development Lifecycle
 
-# Citations
+```shell
+./run.sh  ‘NA ‘NA’ full no yes yes
+```
+
+
+
+
+# CONTACT
+If you have any questions or feedback, feel free to reach out to us:
+
+* [Email](mailto:improve.appgenpro@gmail.com?subject=[GitHub]%20appgenpro%20query)
+
+
+
+
+
+
+
+# CITATIONS
 We would like to acknowledge the use of external libraries and resources that have made this project possible.
 
 Specifically,
@@ -118,11 +158,3 @@ Specifically,
       primaryClass={cs.AI}
 }
 ```
-
-# Contact
-If you have any questions or feedback, feel free to reach out to us:
-
-* [Email](mailto:improve.appgenpro@gmail.com?subject=[GitHub]%20appgenpro%20query)
-
-
-
