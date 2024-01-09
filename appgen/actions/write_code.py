@@ -13,6 +13,8 @@ from autogen.code_utils import (
     execute_code
 )
 
+from pathlib import Path
+
 class WriteCode(Action):
 
     def __init__(
@@ -78,14 +80,28 @@ class WriteCode(Action):
         # save code from previous messages to artifacts
         code_blocks = self._parse_code_blocks(messages)
 
-        # # execute the code if python and add this to the messages
-        # for code_block in code_blocks:
-        #     lang, filename, code = code_block
-        #     if lang == "python" and "flask" not in code:
-        #         messages.append({
-        #             "role": "user",
-        #             "content": f"Executed file {filename} with results: {execute_code(code)}"
-        #         })
+        # execute the code if python and add this to the messages
+        for code_block in code_blocks:
+            lang, filename, code = code_block
+            if lang == "python":
+                if filename.startswith("test_"):
+                    # filepath=Path("/Users/selinkayay/datanomous/appgenpro/coding")/filename
+                    # pytest_command = f"pytest {filepath}"
+                    exec_results = execute_code(filename=filename, work_dir=Path("/Users/selinkayay/datanomous/appgenpro/coding"))
+                    logger.info(f"Executed test case file {filename} with results: {exec_results}")
+                    messages.append({
+                        "role": "user",
+                        "content": f"Executed file {filename} with results: {exec_results}"
+                    })
+            elif lang == "sh" or lang == "bash":
+                exec_results = execute_code(code, lang=lang)
+                logger.info(f"Executed shell script with results: {exec_results}")
+                messages.append({
+                    "role": "user",
+                    "content": f"Executed the shell script with results: {exec_results}"
+                })
+            else:
+                logger.warning(f"Unknown language: {lang}. Code block {code_block} not executed.")
   
         response = client.create(
             context=messages[-1].pop("context", None), messages=recipient._oai_system_message + messages
@@ -126,4 +142,7 @@ class WriteCode(Action):
             codes.append((lang, filename, code))
             code_files = CONFIG.artifacts["code"]
             code_files[filename] = code
+            # save code to some directory
+            from appgen.utils.write_utils import save_code
+            save_code(code, filename, Path("/Users/selinkayay/datanomous/appgenpro/coding"))
         return codes

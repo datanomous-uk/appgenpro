@@ -12,8 +12,8 @@ NAME=$2
 CONFIG=$3
 DEV_TYPE=$4
 BACKLOG=$5
-CLEANUP=$6
-CHAT=$7
+REQUIREMENTS=$6
+DESIGN=$7
 
 
 # Directory to be cleaned
@@ -51,7 +51,7 @@ else
         python appgenpro_cli.py --idea "$IDEA" --name "$NAME" --config "$CONFIG"
     # DEV_TYPE = 2 for implementation only
     elif [ "$DEV_TYPE" = "implement" ]; then
-        python appgenpro_cli.py --idea "$IDEA" --name "$NAME" --config "$CONFIG" --backlog "$BACKLOG"
+        python appgenpro_cli.py --idea "$IDEA" --name "$NAME" --config "$CONFIG" --backlog "$BACKLOG" --requirements "$REQUIREMENTS" --design "$DESIGN"
     else
         echo "Invalid development type specified."
         exit 1

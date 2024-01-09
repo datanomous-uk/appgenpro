@@ -34,10 +34,15 @@
         },
         {
             "role": "JuniorEngineer",
-            "goal": "As a Junior Engineer, your goal is to complete the tasks in the given product backlog as instructed by the Senior Engineer. You MUST use your assistant to help you write code. You MUST fully implement the code correctly for each task with no empty functions or classes, compliant to language industry standards, and readable. You MUST fix the code if it does not work or if you receive feedback from pair programming. You MUST finish the entire backlog one by one as instructed and return all the code written when fully done. For each task, make sure that you provide feedback about the code to the assistant so that the assistant can write better code. If you have any feedback to fix the code, you MUST instruct the assistant to fix the code before moving onto the next task. Otherwise if the code is perfect, you can instruct them to move on right away to the next task.",
+            "goal": "As a Junior Engineer, your goal is to complete the tasks in the given product backlog as instructed by the Senior Engineer. You MUST use your assistant to help you write code. You MUST fully implement the code correctly for each task with no empty functions or classes, compliant to language industry standards, and readable. You MUST fix the code if it does not work when tested or if you receive feedback from pair programming. You MUST finish the entire backlog one by one as instructed and return all the code written when fully done. For each task, make sure that you provide feedback about the code to the assistant so that the assistant can write better code. If you have any feedback to fix the code, you MUST instruct the assistant to fix the code before moving onto the next task. Otherwise if the code is perfect, you can instruct them to move on right away to the next task.",
             "constraints": "You MUST ONLY be working on coding the applications.",
             "watch_list": ["SeniorEngineer"],
             "actions": ["WriteCode"]
+        },
+        {
+            "role": "QAEngineer",
+            "goal": "As a QA Engineer, your goal is to write unit tests for the given codebase to assure it will fulfill the reqirements/user stories in the project requirements document. Give the unit test a comprehensive filename that starts with 'test_'.",
+            "constraints": "You MUST ONLY be working on writing unit tests for the given codebase to ensure it will fulfill the reqirements/user stories of the project."   
         }
     ],
     "tasks" : [
@@ -103,7 +108,7 @@
             "description": "Implementing The Application",
             "assistant_role_name": "JuniorEngineer",
             "user_role_name": "SeniorEngineer",
-            "task_prompt": "Based on the development backlog ({backlog}), and the organization standards ({organization_standards}), write executable code only ensuring adherence to the project's full context. Start starting with the 'main' file and proceeding in dependency order, with no placeholders, no partial implementations, and thorough debugging. You must first evaluate what you have created and reply with working code only.",
+            "task_prompt": "Based on the technical design: ({design}), the development backlog ({backlog}), and the organization standards ({organization_standards}), write executable code only ensuring adherence to the project's full context. Start starting with the 'main' file and proceeding in dependency order, with no placeholders, no partial implementations, and thorough debugging. You must first evaluate what you have created and reply with working code only.",
             "placeholders": {
                 "organization_standards": [
                         "UI Design patterns: For UI development, analyze and implement react design patterns at [https://legacy.reactjs.org/docs/design-principles.html]",
@@ -116,6 +121,30 @@
                         "Deployment to Render.com example code: [```yaml\n# render.yaml\nservices:\n- type: web\n  name: flask-react-app\n  env: docker\n  dockerfilePath: ./Dockerfile\n  envVars:\n  - key: ENVIRONMENT\n    value: production\n  - key: DATABASE_URL\n    value: your_database_url\n  healthCheckPath: /\n  regions:\n  - frankfurt\n  autoDeploy: true\n  buildCommand: python -m build\n  startCommand: python run.py\n```]",
                         "SQLAlchemy example code:: [```python\nfrom flask_sqlalchemy import SQLAlchemy\ndb = SQLAlchemy()\n\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n\n    def __repr__(self):\n        return f'<User {self.username}>'\n```\n]",
                         "Python Flask API Routes example code: [```python\nfrom flask import Flask, jsonify, request\napp = Flask(__name__)\n\n@app.route('/products', methods=['GET'])\ndef get_products():\n    # Logic to fetch and return products\n    products = [{'id': 1, 'name': 'Product A'}, {'id': 2, 'name': 'Product B'}]\n    return jsonify(products)\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```\nThis Flask route '/products' is a part of the Product Service in a microservices setup, responsible for managing product data.",
+                        "Python packages: Create a python package for each service with a __init__.py file. Write them all in one response since these don't need to be tested. MAKE SURE that each code file you write is in a separate code block (guarded by triple backticks).",
+                        "Circular Imports: Avoid circular imports by ensuring that all imports are in the same file."
+                ]
+            }
+        },
+        {
+            "name": "Testing",
+            "description": "Implementing The Application",
+            "assistant_role_name": "QAEngineer",
+            "user_role_name": "JuniorDeveloper",
+            "task_prompt": "Based on the user stories in the project requirements document {requirements}, and the organization standards ({organization_standards}) you MUST test the codebase to ensure that the user will be able to run the starting point of the program and it will run without errors: (Codebase={codebase}). You MUST first Always start by creating a plan that consists of a list of unit test files you will write. To test the application you will likely need to write unit tests and execute them. If execution fails for any unit test, you will need to let the Developer know what the issue is so they can fix the code and send it back to you.",
+            "placeholders": {
+                "organization_standards": [
+                        "UI Design patterns: For UI development, analyze and implement react design patterns at [https://legacy.reactjs.org/docs/design-principles.html]",
+                        "API best practices: For API development, analyze and implement best practices at [https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design] and [https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-implementation] and [https://swagger.io/resources/articles/best-practices-in-api-design/]",
+                        "React:Follow the official React guidelines for component structure, state management, and hooks. Use JSX properly and keep components small and focused. Apply linting tools like ESLint for code quality.",
+                        "Python REST APIs: Adhere to PEP 8 standards for Python code style. Use Flask to build REST APIs. Ensure proper error handling and use HTTP status codes correctly.",
+                        "Node.js: Use asynchronous programming models properly. Structure your project clearly (e.g., MVC pattern). Apply linting with tools like ESLint.",
+                        "Database Access from Python: Use ORM libraries like SQLAlchemy for complex queries and database management. Ensure secure database connections and handle exceptions. Follow best practices for database schema design and query optimization.",
+                        "Dockerization Example code: [```\nFROM node:14\nWORKDIR /usr/src/app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]\n```\nThis Dockerfile creates a Docker image for a Node.js microservice, installing dependencies and setting the command to start the server.]",
+                        "Deployment to Render.com example code: [```yaml\n# render.yaml\nservices:\n- type: web\n  name: flask-react-app\n  env: docker\n  dockerfilePath: ./Dockerfile\n  envVars:\n  - key: ENVIRONMENT\n    value: production\n  - key: DATABASE_URL\n    value: your_database_url\n  healthCheckPath: /\n  regions:\n  - frankfurt\n  autoDeploy: true\n  buildCommand: python -m build\n  startCommand: python run.py\n```]",
+                        "SQLAlchemy example code:: [```python\nfrom flask_sqlalchemy import SQLAlchemy\ndb = SQLAlchemy()\n\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n\n    def __repr__(self):\n        return f'<User {self.username}>'\n```\n]",
+                        "Python Flask API Routes example code: [```python\nfrom flask import Flask, jsonify, request\napp = Flask(__name__)\n\n@app.route('/products', methods=['GET'])\ndef get_products():\n    # Logic to fetch and return products\n    products = [{'id': 1, 'name': 'Product A'}, {'id': 2, 'name': 'Product B'}]\n    return jsonify(products)\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```\nThis Flask route '/products' is a part of the Product Service in a microservices setup, responsible for managing product data.",
+                        "Python unit tests: Use the pytest library to write unit tests. Ensure that each unit test is in a separate code block (guarded by triple backticks). Use Flask's app.test_client() to create a test client that you can use to simulate requests to your application. Configure your Flask application for testing by setting TESTING = True in your configuration, which can help in error handling and performance optimizations specific to testing.",
                         "Python packages: Create a python package for each service with a __init__.py file. Write them all in one response since these don't need to be tested. MAKE SURE that each code file you write is in a separate code block (guarded by triple backticks).",
                         "Circular Imports: Avoid circular imports by ensuring that all imports are in the same file."
                 ]

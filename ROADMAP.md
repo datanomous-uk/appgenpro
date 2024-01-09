@@ -56,7 +56,7 @@
 
 2. Implement security controls (users need to login first and can only access the data available to them, etc)
 
-3. Build own model to reduce cost, increase quality (train on private repos, specific technologies, open source projects), performance, and flexibility for customizations.
+3. Ability to fine-tune model for specific use-cases to reduce cost, increase quality (train on private repos, specific technologies, open source projects), performance, and flexibility for customizations.
 
 4. Self-Learning: Learn from failures and build models based on the feedback. How to measure the hallucination automatically and if the generated code is not OK, what to do?
 
